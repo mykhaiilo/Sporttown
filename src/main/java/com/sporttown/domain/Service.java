@@ -84,7 +84,6 @@ public class Service {
                 case GYMTRAINER12:
                     price = 800;
                     break;
-
                 case MASSAGE:
                     price = 200;
                     break;
@@ -110,7 +109,7 @@ public class Service {
                     price = 50;
                     break;
                 default:
-                    throw new IllegalArgumentException("Invalid abonenent" + names);
+                    throw new IllegalArgumentException("Invalid abonement" + names);
             }
 
 

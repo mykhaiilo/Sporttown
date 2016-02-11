@@ -15,8 +15,9 @@ public class Launcher {
 
         Data data = userDialogServiceImpl.readData();
         Bill bill = calculatorServiceImpl.buildBill(data);
+        System.out.println(bill.getSummaryPrice());
 
-        System.out.println(bill);
+//        System.out.println(bill);
 
     }
 }

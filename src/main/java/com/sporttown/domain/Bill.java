@@ -11,6 +11,14 @@ public class Bill {
 
     private double summaryPrice;
 
+    public double getSummaryPrice() {
+        return summaryPrice;
+    }
+
+    public void setSummaryPrice(double summaryPrice) {
+        this.summaryPrice = summaryPrice;
+    }
+
     private List<Service> listOfServices = new ArrayList<>();
 
     private Client client;

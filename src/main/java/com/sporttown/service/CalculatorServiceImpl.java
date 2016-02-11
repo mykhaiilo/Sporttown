@@ -13,8 +13,32 @@ import java.time.Year;
  * Created by admin on 30.01.2016.
  */
 public class CalculatorServiceImpl implements CalculatorService {
-
+    private double sum;
     private Bill bill = new Bill();
+
+    private UserDialogServiceImpl userDialogService = new UserDialogServiceImpl();
+
+    public double Sum() {
+        for (int i = 0; i < userDialogService.getN(); i++) {
+
+           sum += bill.getListOfServices().get(i).getPrice();
+
+
+        }
+        return bill.getSummaryPrice();
+
+    }
+
+
+    public LocalDate happyDayFemale = Year.now().atMonth(Month.MARCH).atDay(8);
+    public LocalDate happyDayMale = Year.now().atMonth(Month.OCTOBER).atDay(14);
+    public LocalDate tnow = LocalDate.now();
+
+   /* public void discount(double sum){
+    if(tnow.getYear() - userDialogService.getClient().getDateOfEnter().getYear()) > 10)
+*/
+
+
 
 /*    public void makeOnetimePaymantCalculate(Data data) {
         for (int i = 0; i < OneTimePayment.OneTimePaymentBuilder.getCount(); i++) {
@@ -29,22 +53,9 @@ public class CalculatorServiceImpl implements CalculatorService {
 
     }
 
-    public void makeMultiplePaymentCalcaulate(Data data) {
-        for (int i = 0; i < MultiplePayment.MultiplePaymentsBuilder.getCount(); i++) {
-            double multiplypay = 0;
 
-            multiplypay += data.getMultiplePayments().get(i).getPrice();
-            data.setMultipleTimePrice(multiplypay);
-        }
-        for (MultiplePayment mp : data.getMultiplePayments()) {
-            System.out.println(mp);
-        }
 
-    }*/
 
-    public LocalDate happyDayFemale = Year.now().atMonth(Month.MARCH).atDay(8);
-    public LocalDate happyDayMale = Year.now().atMonth(Month.OCTOBER).atDay(14);
-    public LocalDate tnow = LocalDate.now();
 
     /*public void setDiscount(String money) {
 
@@ -84,6 +95,8 @@ public class CalculatorServiceImpl implements CalculatorService {
 
     @Override
     public Bill buildBill(Data data) {
+        bill.getListOfServices();
+        bill.setSummaryPrice(sum);
 
         return bill;
     }

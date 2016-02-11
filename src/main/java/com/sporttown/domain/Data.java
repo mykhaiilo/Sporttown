@@ -10,6 +10,7 @@ import java.util.List;
 public class Data {
 
     private List<Service> services = new ArrayList<>();
+
     private Client client = new Client();
 
     public void setClient(Client client) {

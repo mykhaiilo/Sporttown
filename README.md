@@ -1,9 +1,12 @@
 Please answer the question
-1 At first you need enter information about client
-Name and surname, Town, Date of birthday, when you start visit this gym and please tell us your Sex
-2 Second you should fell in information about additional service that have sport gym
-Guest should choose one or few additional services from the list, choose amount of it
-3 Third you could choose main service in sport gym abonenements the same as in additional service
- Guest should choose one or few additional services from the list, choose amount of it
- Please answer the last question
- After you will get check with all information about client and his purchases
+
+1 At first you need enter information about yourself
+
+Name and surname, Town, Date of birthday, when you start visit this gym, are ypo professional sportsmen and sex
+
+2 Second you should fell in information about howe many services you want to bye
+
+Please chose one of them GYMFORONETIME, GYMTO4PM12, GYMALLDAY12, GYMTO4PMMONTH, GYMALLMONTH31, GYMTRAINER12, MASSAGE, YOGA, SAYNA, KROSFIT, SOLARIY, TOWEL, SLIPPERS, FRESH
+Please enter amount of it
+ 
+After you feel all fields you will get bill 
