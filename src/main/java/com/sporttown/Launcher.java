@@ -11,13 +11,15 @@ import com.sporttown.service.UserDialogServiceImpl;
 public class Launcher {
     public static void main(String[] args) {
         CalculatorServiceImpl calculatorServiceImpl = new CalculatorServiceImpl();
-        UserDialogServiceImpl userDialogServiceImpl = new UserDialogServiceImpl();
+        UserDialogServiceImpl userDialogServiceImpl = calculatorServiceImpl.getUserDialogService();
 
         Data data = userDialogServiceImpl.readData();
+        calculatorServiceImpl.sum();
+        calculatorServiceImpl.discount();
         Bill bill = calculatorServiceImpl.buildBill(data);
-        System.out.println(bill.getSummaryPrice());
+        System.out.println(calculatorServiceImpl.getSum());
 
-//        System.out.println(bill);
+        System.out.println(bill);
 
     }
 }

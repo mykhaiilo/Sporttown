@@ -25,6 +25,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
         return sex;
     }
 
+    public String getLevel() {
+        return level;
+    }
+
     public void setNameSurname(String namesurname) {
         this.nameSurname = namesurname;
     }

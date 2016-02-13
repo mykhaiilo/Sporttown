@@ -1,5 +1,8 @@
 package com.sporttown.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,10 @@ public class Bill {
 
     private Client client;
 
+    public Client getClient() {
+        return client;
+    }
+
     public List<Service> getListOfServices(){
         return listOfServices;
     }
@@ -33,7 +40,7 @@ public class Bill {
 
     @Override
     public String toString() {
-        System.out.println("Client " + client.toString());
+       /* System.out.println("Client " + client.);
         System.out.println("With all discounts you need to pay  " + summaryPrice);
         System.out.println("Thank you for being our costumer, good luck");
         StringBuilder sb = new StringBuilder();
@@ -41,6 +48,7 @@ public class Bill {
             sb.append(s.toString());
         }
         sb.append(LocalDate.now());
-        return sb.toString();
+        return sb.toString();*/
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }
