@@ -1,9 +1,9 @@
 package com.sporttown.domain;
 
-import java.time.LocalDate;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.time.LocalDate;
 
 /**
  * Created by admin on 15.01.2016.
@@ -13,20 +13,21 @@ import org.apache.commons.lang3.builder.ToStringStyle;
     private LocalDate dateOfBirth;
     private LocalDate dateOfEnter;
     private String town;
-    private String sex;
-    private String level;
-    private int count = 0;
+    private Sex sex;
+    // TODO: use boolean
+    private boolean isProffecional;
+    private int count;
 
     public LocalDate getDateOfEnter() {
         return dateOfEnter;
     }
 
-    public String getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public String getLevel() {
-        return level;
+    public boolean getIsProffecional() {
+        return isProffecional;
     }
 
     public void setNameSurname(String namesurname) {
@@ -45,12 +46,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
         this.town = town;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setIsProffecional(boolean isProffecional) {
+        this.isProffecional = isProffecional;
     }
 
     public void setCount(int count) {
@@ -67,8 +68,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
         private LocalDate dateOfBirth;
         private LocalDate dateOfEnter;
         private String town;
-        private String sex;
-        private String level;
+        private Sex sex;
+        private boolean level;
         private static int count;
 
         public LocalDate getDateOfEnter() {
@@ -96,12 +97,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
             return this;
         }
 
-        public ClientBuilder makeSex(String sex) {
+        public ClientBuilder makeSex(Sex sex) {
             this.sex = sex;
             return this;
         }
 
-        public ClientBuilder makeLevel(String level) {
+        public ClientBuilder makeLevel(boolean level) {
             this.level = level;
             return this;
         }
@@ -113,7 +114,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
             client.setDateOfEnter(dateOfEnter);
             client.setTown(town);
             client.setSex(sex);
-            client.setLevel(level);
+            client.setIsProffecional(level);
             client.setCount(count);
             return client;
 

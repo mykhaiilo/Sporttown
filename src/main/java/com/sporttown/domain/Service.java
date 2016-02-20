@@ -65,7 +65,6 @@ public class Service {
         public ServiceBuilder makeAmount(int amount) {
             this.amount = amount;
             price *= amount;
-
             return this;
         }
 
@@ -140,58 +139,6 @@ public class Service {
         }
 
 
-        /*public ServiceBuilder makePrice() {
-
-            switch (names) {
-                case GYMFORONETIME:
-                    price = 35;
-                    break;
-                case GYMTO4PM12:
-                    price = 390;
-                    break;
-                case GYMALLDAY12:
-                    price = 420;
-                    break;
-                case GYMTO4PMMONTH:
-                    price = 450;
-                    break;
-                case GYMALLMONTH31:
-                    price = 490;
-                    break;
-                case GYMTRAINER12:
-                    price = 800;
-                    break;
-                case MASSAGE:
-                    price = 200;
-                    break;
-                case SAYNA:
-                    price = 150;
-                    break;
-                case SOLARIY:
-                    price = 150;
-                    break;
-                case KROSFIT:
-                    price = 30;
-                    break;
-                case YOGA:
-                    price = 35;
-                    break;
-                case TOWEL:
-                    price = 5;
-                    break;
-                case SLIPPERS:
-                    price = 5;
-                    break;
-                case FRESH:
-                    price = 50;
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid abonement" + names);
-            }
-
-
-            return this;
-        }*/
 
         public Service build() {
             Service service = new Service();

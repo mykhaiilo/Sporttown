@@ -1,14 +1,11 @@
 package com.sporttown.service;
 
-import com.sporttown.domain.Bill;
-
-import com.sporttown.domain.Data;
-import com.sporttown.domain.ServiceName;
-import com.sporttown.domain.Sex;
+import com.sporttown.domain.*;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
+import java.util.List;
 
 
 /**
@@ -17,46 +14,49 @@ import java.time.Year;
 public class CalculatorServiceImpl implements CalculatorService {
     private double sum;
     private Bill bill = new Bill();
-    private UserDialogServiceImpl userDialogService = new UserDialogServiceImpl();
-    private Data data = userDialogService.getData();
+//    private UserDialogServiceImpl userDialogService = new UserDialogServiceImpl();
+//    private Data data = userDialogService.getData();
 
-    public UserDialogServiceImpl getUserDialogService() {
-        return userDialogService;
-    }
+//    public UserDialogServiceImpl getUserDialogService() {
+//        return userDialogService;
+//    }
 
     public double getSum() {
         return sum;
     }
 
-    public double sum() {
+/*    public double sum() {
         for (int i = 0; i < userDialogService.getN(); i++) {
             System.err.println(data.getServices().get(i).getPrice());
             sum += data.getServices().get(i).getPrice();
         }
         return bill.getSummaryPrice();
-    }
+    }*/
 
    public LocalDate happyDayFemale = Year.now().atMonth(Month.MARCH).atDay(8);
     public LocalDate happyDayMale = Year.now().atMonth(Month.OCTOBER).atDay(14);
     public LocalDate tnow = LocalDate.now();
 
-    public void discount() {
-        if ((tnow.getYear() - data.getClient().getDateOfEnter().getYear()) > 10) {
+    public void discount(Client client, List<Service> list) {
+        if ((tnow.getYear() - client.getDateOfEnter().getYear()) > 10) {
             sum *= 0.95;
-        } else if (data.getClient().getLevel().equals("YES")
-                && (data.getServices().equals(ServiceName.SAYNA))
-                    || data.getServices().equals(ServiceName.SLIPPERS)
-                    || data.getServices().equals(ServiceName.MASSAGE)
-                    || data.getServices().equals(ServiceName.TOWEL)) {
+        }
+        if (client.getIsProffecional() == true
+                && (list.equals(ServiceName.SAYNA))
+                    || list.equals(ServiceName.SLIPPERS)
+                    || list.equals(ServiceName.MASSAGE)
+                    || list.equals(ServiceName.TOWEL)) {
             sum = 0;
-        } else if (tnow == happyDayFemale
-                && data.getClient().getSex().equals(Sex.FEMALE.toString())
-                && data.getServices().equals(ServiceName.GYMFORONETIME)) {
+        }
+        if (tnow == happyDayFemale
+                && client.getSex().equals(Sex.FEMALE.toString())
+                && list.equals(ServiceName.GYMFORONETIME)) {
             sum = 0;
             System.out.println("Happy women day");
-        } else if (tnow == happyDayMale
-                && data.getClient().getSex().equals(Sex.MALE.toString())
-                && data.getServices().equals(ServiceName.GYMFORONETIME)) {
+        }
+        if (tnow == happyDayMale
+                && client.getSex().equals(Sex.MALE.toString())
+                && list.equals(ServiceName.GYMFORONETIME)) {
             sum = 0;
             System.out.println("Happy men day");
 
@@ -65,8 +65,13 @@ public class CalculatorServiceImpl implements CalculatorService {
 
     @Override
     public Bill buildBill(Data data) {
-        bill.getListOfServices();
-        bill.setSummaryPrice(sum);
+
+        Client client = data.getClient();
+        List<Service> list = data.getServices();
+        discount(client, list);
+
+        //bill.getListOfServices();
+        //bill.setSummaryPrice(sum);
 
         return bill;
     }
