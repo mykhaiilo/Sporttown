@@ -40,7 +40,7 @@ public class Service {
 
     public static class ServiceBuilder {
 
-        private int amount;
+
         private int price;
         private Map<String, String> maps = new HashMap<String, String>();
         private ServiceName names;
@@ -61,13 +61,6 @@ public class Service {
             this.names = names;
             return this;
         }
-
-        public ServiceBuilder makeAmount(int amount) {
-            this.amount = amount;
-            price *= amount;
-            return this;
-        }
-
         public ServiceBuilder makePrice() {
             String csvFile = "./src/main/resource/ServicePrices.csv";
             String line = "";
