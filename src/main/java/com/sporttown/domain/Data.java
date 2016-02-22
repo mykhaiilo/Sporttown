@@ -15,6 +15,7 @@ public class Data {
 
     public void setClient(Client client) {
         this.client = client;
+        ;
     }
 
     public Client getClient() {
@@ -23,7 +24,7 @@ public class Data {
 
     public void setServices(List<Service> services) {
         this.services = services;
-    }
+            }
 
     public List<Service> getServices() {
         return services;

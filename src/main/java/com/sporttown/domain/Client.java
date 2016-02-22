@@ -14,8 +14,7 @@ import java.time.LocalDate;
     private LocalDate dateOfEnter;
     private String town;
     private Sex sex;
-    // TODO: use boolean
-    private boolean isProffecional;
+    private String isProffecional;
     private int count;
 
     public LocalDate getDateOfEnter() {
@@ -26,7 +25,7 @@ import java.time.LocalDate;
         return sex;
     }
 
-    public boolean getIsProffecional() {
+    public String getIsProffecional() {
         return isProffecional;
     }
 
@@ -50,7 +49,7 @@ import java.time.LocalDate;
         this.sex = sex;
     }
 
-    public void setIsProffecional(boolean isProffecional) {
+    public void setIsProffecional(String isProffecional) {
         this.isProffecional = isProffecional;
     }
 
@@ -69,7 +68,7 @@ import java.time.LocalDate;
         private LocalDate dateOfEnter;
         private String town;
         private Sex sex;
-        private boolean level;
+        private String level;
         private static int count;
 
         public LocalDate getDateOfEnter() {
@@ -102,7 +101,7 @@ import java.time.LocalDate;
             return this;
         }
 
-        public ClientBuilder makeLevel(boolean level) {
+        public ClientBuilder makeLevel(String level) {
             this.level = level;
             return this;
         }

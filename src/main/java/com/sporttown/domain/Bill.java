@@ -1,16 +1,18 @@
 package com.sporttown.domain;
 
+import com.sporttown.service.UserDialogServiceImpl;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by admin on 03.02.2016.
  */
-public class Bill {
+public class Bill extends UserDialogServiceImpl{
+
+
+
 
     private double summaryPrice;
 
@@ -22,9 +24,9 @@ public class Bill {
         this.summaryPrice = summaryPrice;
     }
 
-    private List<Service> listOfServices = new ArrayList<>();
+    private List<Service> listOfServices =null;
 
-    private Client client;
+    private Client client =null;
 
     public Client getClient() {
         return client;
@@ -51,4 +53,6 @@ public class Bill {
         return sb.toString();*/
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
+
 }
+

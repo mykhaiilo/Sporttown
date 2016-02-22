@@ -18,12 +18,24 @@ public class UserDialogServiceImpl implements UserDialogService {
     private Client.ClientBuilder clientBuilder = new Client.ClientBuilder();
     private String readerText;
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private int count = 1;
 
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public Data getData() {
+        return data;
+    }
 
     private boolean regexName(String s) {
         Pattern pattern = Pattern.compile("[a-zA-z ]*$");
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
+    }
+
+    public int getCount() {
+        return count;
     }
 
     private void Name() {
@@ -50,12 +62,6 @@ public class UserDialogServiceImpl implements UserDialogService {
 
     }
 
-    private boolean regexTown(String s) {
-        Pattern pattern = Pattern.compile("[a-zA-z ]*$");
-        Matcher matcher = pattern.matcher(s);
-        return matcher.matches();
-    }
-
     private void Town() {
         System.out.println("Please enter your town");
         for (int i = 3; i > 0; i--) {
@@ -64,7 +70,7 @@ public class UserDialogServiceImpl implements UserDialogService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (regexTown(readerText)) {
+            if (regexName(readerText)) {
                 clientBuilder = clientBuilder.makeTown(readerText);
                 return;
             } else {
@@ -111,18 +117,6 @@ public class UserDialogServiceImpl implements UserDialogService {
 
     }
 
-    private boolean regexDateOfEnter(String s) {
-        try {
-            Pattern pattern = Pattern.compile(String.valueOf(LocalDate.parse(s)));
-            Matcher matcher = pattern.matcher(s);
-            return matcher.matches();
-        } catch (IllegalArgumentException e) {
-        } catch (DateTimeParseException e) {
-
-        }
-        return false;
-    }
-
     private void DateOfEnter() throws IOException {
         for (int i = 3; i > 0; i--) {
             try {
@@ -131,7 +125,7 @@ public class UserDialogServiceImpl implements UserDialogService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (regexDateOfEnter(readerText)) {
+            if (regexDateOfBirth(readerText)) {
                 clientBuilder = clientBuilder.makeDateOfEnter(LocalDate.parse(readerText));
                 return;
             } else {
@@ -177,13 +171,19 @@ public class UserDialogServiceImpl implements UserDialogService {
     }
 
     private boolean regexLevel(String s) {
-        Pattern pattern = Pattern.compile("(True|False|TRUE|FALSE)");
+        Pattern pattern = Pattern.compile("([Y,y](es|ES|eS|Es))|([N,n](o|O))");
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
     }
 
-    private void LevelCount() {
-        System.out.println("Please answer are you professional sportsmen 'true'");
+    private boolean regexLevel2(String s) {
+        Pattern pattern = Pattern.compile("([Y,y](es|ES|eS|Es))");
+        Matcher matcher = pattern.matcher(s);
+        return matcher.matches();
+    }
+
+    private void levelCount() {
+        System.out.println("Please answer are you professional sportsmen 'YES' or 'NO' " );
         for (int i = 3; i > 0; i--) {
             try {
                 readerText = reader.readLine();
@@ -191,7 +191,7 @@ public class UserDialogServiceImpl implements UserDialogService {
                 e.printStackTrace();
             }
             if (regexLevel(readerText)) {
-                clientBuilder = clientBuilder.makeLevel(Boolean.parseBoolean(readerText));
+                clientBuilder = clientBuilder.makeLevel(readerText);
                 return;
             } else {
 
@@ -221,7 +221,7 @@ public class UserDialogServiceImpl implements UserDialogService {
 
             SexCount();
 
-            LevelCount();
+            levelCount();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -235,7 +235,6 @@ public class UserDialogServiceImpl implements UserDialogService {
 
         try {
 
-                for (int j = 0; j < n; j++) {
                     System.out.println("GYMFORONETIME, GYMTO4PM12, GYMALLDAY12, GYMTO4PMMONTH, GYMALLMONTH31, GYMTRAINER12, MASSAGE, YOGA, SAYNA, KROSFIT, SOLARIY, TOWEL, SLIPPERS, FRESH");
                     serviceBuilder = serviceBuilder.makeName(ServiceName.valueOf(reader.readLine())).makePrice();
                     System.out.println("Please enter amount ");
@@ -249,8 +248,6 @@ public class UserDialogServiceImpl implements UserDialogService {
 
                     data.getServices().add(serviceBuilder.build());
                     buildCount();
-
-            }
 
 
         } catch (IOException e) {
@@ -271,13 +268,12 @@ public class UserDialogServiceImpl implements UserDialogService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (regexLevel(readerText)) {
+            if (regexLevel2(readerText)) {
                 buildServices();
+                count++;
+                System.out.println(count);
             } else {
-                System.err.println("Please enter 'YES/yes' or 'NO/no'" + (i-1) + " tries left ");
-                if (i == 1) {
-                    System.exit(0);
-                }
+          return;
 
             }
 

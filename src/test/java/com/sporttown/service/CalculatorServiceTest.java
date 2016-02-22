@@ -1,10 +1,15 @@
 package com.sporttown.service;
 
-import com.sporttown.domain.Bill;
+import com.sporttown.domain.Client;
 import com.sporttown.domain.Data;
 import com.sporttown.domain.Service;
+import com.sporttown.domain.ServiceName;
+import com.sporttown.domain.Sex;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,24 +18,74 @@ import java.util.List;
 public class CalculatorServiceTest {
 
     @Test
-    //тестувати професіонала
-    //тест >10 років
-    //тест жінки
-    //тест чоловіка
     public void testCalculationServiceImplForBodyBuilder() {
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
+        UserDialogServiceImpl userDialogService = new UserDialogServiceImpl();
         Data data = new Data();
-        data.setClient(null);
-        data.setServices(null);
-        Bill bill = calculatorService.buildBill(data);
-        List<Service> list = bill.getListOfServices();
-        for (Service service : list
-                ) {
-            /*if (service.getName().equals(Enum)) {
-                Assert.assertEquals(service.getPrice(), 0);
-            }
-        }*/
+        Service service = new Service();
+        service.setName(ServiceName.SAYNA);
+        List<Service> list = new ArrayList<>();
+        list.add(service);
+        data.setClient(new Client());
+        Client client = new Client();
+        client.setIsProffecional("YES");
+        userDialogService.setCount(1);
+        calculatorService.discount(client, list);
+        Assert.assertEquals(0.0, calculatorService.getSum());
+        }
+
+        @Test
+    public void testCalculationServiceImplForTenYearSportsmen(){
+            CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
+            Data data =new Data();
+            Service service = new Service();
+            List<Service> list = new ArrayList<>();
+            list.add(service);
+            service.setName(ServiceName.FRESH);
+            data.setClient(new Client());
+            Client client = new Client();
+            calculatorService.setTnow(LocalDate.now());
+            client.setDateOfEnter(LocalDate.ofEpochDay(1990-01-01));
+            calculatorService.setSum(100);
+            calculatorService.discount(client, list);
+            Assert.assertEquals(95.0, calculatorService.getSum());
 
         }
+
+    @Test
+    public void testCalculationServiceImplForWomenDay(){
+        CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
+        UserDialogServiceImpl userDialogService = new UserDialogServiceImpl();
+        Data data = new Data();
+        Service service = new Service();
+        service.setName(ServiceName.SAYNA);
+        List<Service> list = new ArrayList<>();
+        list.add(service);
+        data.setClient(new Client());
+        Client client = new Client();
+        calculatorService.setTnow(LocalDate.ofEpochDay(2015-03-8));
+        userDialogService.setCount(1);
+        client.setSex(Sex.FEMALE);
+        calculatorService.discount(client, list);
+        Assert.assertEquals(0.0, calculatorService.getSum());
     }
-}
+
+    @Test
+    public void testCalculationServiceImplForMenDay(){
+        CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
+        UserDialogServiceImpl userDialogService = new UserDialogServiceImpl();
+        Data data = new Data();
+        Service service = new Service();
+        service.setName(ServiceName.SAYNA);
+        List<Service> list = new ArrayList<>();
+        list.add(service);
+        data.setClient(new Client());
+        Client client = new Client();
+        calculatorService.setTnow(LocalDate.ofEpochDay(2015-10-20));
+        userDialogService.setCount(1);
+        client.setSex(Sex.MALE);
+        calculatorService.discount(client, list);
+        Assert.assertEquals(0.0, calculatorService.getSum());
+    }
+    }
+

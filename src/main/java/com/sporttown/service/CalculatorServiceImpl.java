@@ -7,72 +7,84 @@ import java.time.Month;
 import java.time.Year;
 import java.util.List;
 
-
-/**
- * Created by admin on 30.01.2016.
- */
 public class CalculatorServiceImpl implements CalculatorService {
     private double sum;
     private Bill bill = new Bill();
-//    private UserDialogServiceImpl userDialogService = new UserDialogServiceImpl();
-//    private Data data = userDialogService.getData();
+    Client client = null;
+    List<Service> list = null;
 
-//    public UserDialogServiceImpl getUserDialogService() {
-//        return userDialogService;
-//    }
-
-    public double getSum() {
-        return sum;
+    public Client getClient() {
+        return client;
     }
 
-/*    public double sum() {
-        for (int i = 0; i < userDialogService.getN(); i++) {
-            System.err.println(data.getServices().get(i).getPrice());
-            sum += data.getServices().get(i).getPrice();
-        }
-        return bill.getSummaryPrice();
-    }*/
+    public List<Service> getList() {
+        return list;
+    }
 
-   public LocalDate happyDayFemale = Year.now().atMonth(Month.MARCH).atDay(8);
-    public LocalDate happyDayMale = Year.now().atMonth(Month.OCTOBER).atDay(14);
-    public LocalDate tnow = LocalDate.now();
+    UserDialogServiceImpl userDialogService = new UserDialogServiceImpl();
+
+    public void sum() {
+
+        for (int i = 0; i < userDialogService.getCount(); i++) {
+            sum += list.get(i).getPrice();
+        }
+         bill.setSummaryPrice(sum);
+    }
+
+    private LocalDate happyDayFemale = Year.now().atMonth(Month.MARCH).atDay(8);
+    private LocalDate happyDayMale = Year.now().atMonth(Month.OCTOBER).atDay(14);
+    private LocalDate tnow = LocalDate.now();
+
+    public void setTnow(LocalDate tnow) {
+        this.tnow = tnow;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
 
     public void discount(Client client, List<Service> list) {
+        try{
         if ((tnow.getYear() - client.getDateOfEnter().getYear()) > 10) {
             sum *= 0.95;
         }
-        if (client.getIsProffecional() == true
+        if (client.getIsProffecional().equals("YES")
                 && (list.equals(ServiceName.SAYNA))
                     || list.equals(ServiceName.SLIPPERS)
                     || list.equals(ServiceName.MASSAGE)
-                    || list.equals(ServiceName.TOWEL)) {
+                    || list.equals(ServiceName.TOWEL)
+                && userDialogService.getCount() == 1) {
             sum = 0;
         }
         if (tnow == happyDayFemale
                 && client.getSex().equals(Sex.FEMALE.toString())
-                && list.equals(ServiceName.GYMFORONETIME)) {
+                && list.equals(ServiceName.GYMFORONETIME)
+                && userDialogService.getCount() == 1) {
             sum = 0;
             System.out.println("Happy women day");
         }
         if (tnow == happyDayMale
                 && client.getSex().equals(Sex.MALE.toString())
-                && list.equals(ServiceName.GYMFORONETIME)) {
+                && list.equals(ServiceName.GYMFORONETIME)
+                && userDialogService.getCount() == 1) {
             sum = 0;
             System.out.println("Happy men day");
-
         }
+        } catch (NullPointerException e){}
     }
 
     @Override
     public Bill buildBill(Data data) {
 
-        Client client = data.getClient();
-        List<Service> list = data.getServices();
+        client = data.getClient();
+        list = data.getServices();
+        sum();
         discount(client, list);
 
-        //bill.getListOfServices();
-        //bill.setSummaryPrice(sum);
-
         return bill;
+    }
+
+    public double getSum() {
+        return sum;
     }
 }
