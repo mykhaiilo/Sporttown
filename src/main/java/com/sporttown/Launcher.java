@@ -4,10 +4,10 @@ import com.sporttown.domain.Bill;
 import com.sporttown.domain.Data;
 import com.sporttown.service.CalculatorServiceImpl;
 import com.sporttown.service.UserDialogServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * Created by admin on 24.01.2016.
- */
+
 public class Launcher {
     public static void main(String[] args) {
         CalculatorServiceImpl calculatorServiceImpl = new CalculatorServiceImpl();
@@ -15,8 +15,8 @@ public class Launcher {
 
         Data data = userDialogServiceImpl.readData();
         Bill bill = calculatorServiceImpl.buildBill(data);
-        //System.out.println(calculatorServiceImpl.getSum());
-
+        Logger logger = LoggerFactory.getLogger(Launcher.class);
+        logger.info("Launcher");
         System.out.println(bill);
 
     }

@@ -14,12 +14,20 @@ import java.util.Map;
  * Created by admin on 03.02.2016.
  */
 public class Service {
-
+    private int amount;
     private ServiceName names;
     private int price;
 
     public ServiceName getNames() {
         return names;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     public void setName(ServiceName names) {
@@ -40,7 +48,7 @@ public class Service {
 
     public static class ServiceBuilder {
 
-
+        private int amount;
         private int price;
         private Map<String, String> maps = new HashMap<String, String>();
         private ServiceName names;
@@ -57,12 +65,19 @@ public class Service {
             return price;
         }
 
+        public ServiceBuilder makeAmount(int amount) {
+            this.amount = amount;
+
+            return this;
+        }
+
         public ServiceBuilder makeName(ServiceName names) {
             this.names = names;
             return this;
         }
+
         public ServiceBuilder makePrice() {
-            String csvFile = "./src/main/resource/ServicePrices.csv";
+            String csvFile = "./src/main/resources/ServicePrices.csv";
             String line = "";
             String csvSplitBy = ",";
             BufferedReader priceReader = null;
@@ -132,7 +147,6 @@ public class Service {
         }
 
 
-
         public Service build() {
             Service service = new Service();
             service.setName(names);
@@ -140,6 +154,8 @@ public class Service {
             return service;
 
         }
+
+
     }
 
 

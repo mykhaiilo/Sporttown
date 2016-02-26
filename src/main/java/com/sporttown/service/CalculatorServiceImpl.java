@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CalculatorServiceImpl implements CalculatorService {
     private double sum;
-    private Bill bill = new Bill();
+    private Bill bill;
     Client client = null;
     List<Service> list = null;
 
@@ -28,7 +28,7 @@ public class CalculatorServiceImpl implements CalculatorService {
         for (int i = 0; i < userDialogService.getCount(); i++) {
             sum += list.get(i).getPrice();
         }
-         bill.setSummaryPrice(sum);
+        bill.setSummaryPrice(sum);
     }
 
     private LocalDate happyDayFemale = Year.now().atMonth(Month.MARCH).atDay(8);
@@ -44,40 +44,44 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     public void discount(Client client, List<Service> list) {
-        try{
-        if ((tnow.getYear() - client.getDateOfEnter().getYear()) > 10) {
-            sum *= 0.95;
-        }
-        if (client.getIsProffecional().equals("YES")
-                && (list.equals(ServiceName.SAYNA))
+        try {
+            if ((tnow.getYear() - client.getDateOfEnter().getYear()) > 10) {
+                sum *= 0.95;
+            }
+            if (client.getIsProffecional().equals("YES")
+                    && (list.equals(ServiceName.SAYNA))
                     || list.equals(ServiceName.SLIPPERS)
                     || list.equals(ServiceName.MASSAGE)
                     || list.equals(ServiceName.TOWEL)
-                && userDialogService.getCount() == 1) {
-            sum = 0;
+                    && userDialogService.getCount() == 1) {
+                sum = 0;
+            }
+            if (tnow == happyDayFemale
+                    && client.getSex().equals(Sex.FEMALE.toString())
+                    && list.equals(ServiceName.GYMFORONETIME)
+                    && userDialogService.getCount() == 1) {
+                sum = 0;
+                System.out.println("Happy women day");
+            }
+            if (tnow == happyDayMale
+                    && client.getSex().equals(Sex.MALE.toString())
+                    && list.equals(ServiceName.GYMFORONETIME)
+                    && userDialogService.getCount() == 1) {
+                sum = 0;
+                System.out.println("Happy men day");
+            }
+        } catch (NullPointerException e) {
         }
-        if (tnow == happyDayFemale
-                && client.getSex().equals(Sex.FEMALE.toString())
-                && list.equals(ServiceName.GYMFORONETIME)
-                && userDialogService.getCount() == 1) {
-            sum = 0;
-            System.out.println("Happy women day");
-        }
-        if (tnow == happyDayMale
-                && client.getSex().equals(Sex.MALE.toString())
-                && list.equals(ServiceName.GYMFORONETIME)
-                && userDialogService.getCount() == 1) {
-            sum = 0;
-            System.out.println("Happy men day");
-        }
-        } catch (NullPointerException e){}
     }
 
     @Override
     public Bill buildBill(Data data) {
 
         client = data.getClient();
+
         list = data.getServices();
+        bill = new Bill(client, list);
+        list.size();
         sum();
         discount(client, list);
 

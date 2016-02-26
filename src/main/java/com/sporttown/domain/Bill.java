@@ -1,6 +1,5 @@
 package com.sporttown.domain;
 
-import com.sporttown.service.UserDialogServiceImpl;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -9,12 +8,16 @@ import java.util.List;
 /**
  * Created by admin on 03.02.2016.
  */
-public class Bill extends UserDialogServiceImpl{
+public class Bill {
 
-
-
-
+    private List<Service> listOfServices;
+    private Client client;
     private double summaryPrice;
+
+    public Bill(Client client, List<Service> services){
+        this.client= client;
+        this.listOfServices=services;
+    }
 
     public double getSummaryPrice() {
         return summaryPrice;
@@ -23,10 +26,6 @@ public class Bill extends UserDialogServiceImpl{
     public void setSummaryPrice(double summaryPrice) {
         this.summaryPrice = summaryPrice;
     }
-
-    private List<Service> listOfServices =null;
-
-    private Client client =null;
 
     public Client getClient() {
         return client;
