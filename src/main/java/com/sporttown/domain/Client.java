@@ -15,7 +15,7 @@ import java.time.LocalDate;
     private String town;
     private Sex sex;
     private String isProffecional;
-    private int count;
+
 
     public LocalDate getDateOfEnter() {
         return dateOfEnter;
@@ -53,9 +53,7 @@ import java.time.LocalDate;
         this.isProffecional = isProffecional;
     }
 
-    public void setCount(int count) {
-        this.count = count;
-    }
+    
 
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
@@ -114,7 +112,7 @@ import java.time.LocalDate;
             client.setTown(town);
             client.setSex(sex);
             client.setIsProffecional(level);
-            client.setCount(count);
+
             return client;
 
         }

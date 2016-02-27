@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by admin on 03.02.2016.
- */
 public class Service {
+
     private int amount;
+
     private ServiceName names;
+
     private int price;
 
     public ServiceName getNames() {

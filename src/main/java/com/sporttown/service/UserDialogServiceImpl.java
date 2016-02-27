@@ -18,24 +18,11 @@ public class UserDialogServiceImpl implements UserDialogService {
     private Client.ClientBuilder clientBuilder = new Client.ClientBuilder();
     private String readerText;
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private int count = 1;
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public Data getData() {
-        return data;
-    }
 
     private boolean regexName(String s) {
         Pattern pattern = Pattern.compile("[a-zA-z ]*$");
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
-    }
-
-    public int getCount() {
-        return count;
     }
 
     private void Name() {
@@ -270,8 +257,7 @@ public class UserDialogServiceImpl implements UserDialogService {
             }
             if (regexLevel2(readerText)) {
                 buildServices();
-                count++;
-                System.out.println(count);
+
             } else {
           return;
 
