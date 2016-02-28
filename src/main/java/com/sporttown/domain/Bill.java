@@ -20,6 +20,10 @@ public class Bill {
         this.summaryPrice = summaryPrice;
     }
 
+    public double getSummaryPrice() {
+        return summaryPrice;
+    }
+
     @Override
     public String toString() {
         System.out.println("Today is "+ LocalDate.now());

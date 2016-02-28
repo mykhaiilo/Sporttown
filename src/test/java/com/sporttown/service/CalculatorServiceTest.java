@@ -1,11 +1,18 @@
 package com.sporttown.service;
 
-public class CalculatorServiceTest {
+import com.sporttown.domain.Data;
+import com.sporttown.domain.Service;
 
-    /*@Test
+public class CalculatorServiceTest {
+    private CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
+    private Data data = new Data();
+    private Service service = new Service();
+
+
+   /* @Test
     public void testCalculationServiceImplForBodyBuilder() {
-        CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
-        Data data = new Data();
+
+
         Service service = new Service();
         service.setName(ServiceName.SAYNA);
         List<Service> list = new ArrayList<>();
@@ -13,7 +20,7 @@ public class CalculatorServiceTest {
         data.setClient(new Client());
         Client client = new Client();
         client.setIsProffecional("YES");
-        calculatorService.discount(client, list);
+        calculatorService.sum(client, list);
         Assert.assertEquals(0.0, calculatorService.getSum());
     }
 
@@ -27,7 +34,6 @@ public class CalculatorServiceTest {
         service.setName(ServiceName.FRESH);
         data.setClient(new Client());
         Client client = new Client();
-        calculatorService.setTnow(LocalDate.now());
         client.setDateOfEnter(LocalDate.ofEpochDay(1990 - 01 - 01));
         calculatorService.setSum(100);
         calculatorService.discount(client, list);
