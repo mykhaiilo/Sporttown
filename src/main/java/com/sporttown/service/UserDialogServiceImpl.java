@@ -37,16 +37,15 @@ public class UserDialogServiceImpl implements UserDialogService {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e.toString());
+                logger.error("Please type in another format", e);
                 e.printStackTrace();
             }
             if (regexName(readerText)) {
                 clientBuilder = clientBuilder.makeNameSurname(readerText);
                 return;
             } else {
-
-                System.err.println("Please enter letters from 'a' to 'z' " + (i - 1) + " tries left ");
-                if (i == 1) {
+                logger.info("Please enter letters from 'a' to 'z' " + (i - 1) + " tries left ");
+                               if (i == 1) {
                     System.exit(0);
                 }
 
@@ -62,14 +61,14 @@ public class UserDialogServiceImpl implements UserDialogService {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e.toString());
+                logger.error("Please type in another format", e);
                 e.printStackTrace();
             }
             if (regexName(readerText)) {
                 clientBuilder = clientBuilder.makeTown(readerText);
                 return;
             } else {
-                System.err.println("Please enter letters from 'a' to 'z'" + (i - 1) + " tries left ");
+                logger.info("Please enter letters from 'a' to 'z'" + (i - 1) + " tries left ");
                 if (i == 1) {
                     System.exit(0);
                 }
@@ -85,8 +84,9 @@ public class UserDialogServiceImpl implements UserDialogService {
             Matcher matcher = pattern.matcher(s);
             return matcher.matches();
         } catch (IllegalArgumentException e) {
+            logger.error("Please type in another format", e);
         } catch (DateTimeParseException e) {
-
+            logger.error("Incorrect data type format", e);
         }
         return false;
     }
@@ -97,14 +97,14 @@ public class UserDialogServiceImpl implements UserDialogService {
                 System.out.println("Please enter the date of birth : Year-month-day");
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e.toString());
+                logger.error("Please type in another format", e);
                 e.printStackTrace();
             }
             if (regexDateOfBirth(readerText)) {
                 clientBuilder = clientBuilder.makeDateOfBirth(LocalDate.parse(readerText));
                 return;
             } else {
-                System.err.println("You have " + (i - 1) + " tries left ");
+                logger.info("You have " + (i - 1) + " tries left ");
                 if (i == 1) {
                     System.exit(0);
                 }
@@ -119,14 +119,14 @@ public class UserDialogServiceImpl implements UserDialogService {
                 System.out.println("Please enter the date of enter : Year-month-day");
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e.toString());
+                logger.error("Please type in another format", e);
                 e.printStackTrace();
             }
             if (regexDateOfBirth(readerText)) {
                 clientBuilder = clientBuilder.makeDateOfEnter(LocalDate.parse(readerText));
                 return;
             } else {
-                System.err.println("You have " + (i - 1) + " tries left ");
+                logger.info("You have " + (i - 1) + " tries left ");
                 if (i == 1) {
                     System.exit(0);
                 }
@@ -141,25 +141,25 @@ public class UserDialogServiceImpl implements UserDialogService {
             Matcher matcher = pattern.matcher(s);
             return matcher.matches();
         } catch (IllegalArgumentException e) {
+            logger.error("Please type correct value YES or NO");
         }
         return false;
     }
 
-    private void SexCount() {
+    private void countMaleFemale() {
         System.out.println("Please enter your Sex");
         for (int i = 0; i < 3; i--) {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
-                System.err.println("EXCEPTION");
-                logger.error("Please type in another format", e.toString());
+                logger.error("Please type in another format", e);
                 e.printStackTrace();
             }
             if (regexSex(readerText)) {
                 clientBuilder = clientBuilder.makeSex(Sex.valueOf(readerText));
                 return;
             } else {
-                System.err.println("Please enter 'MALE' or 'FEMALE '" + (i - 1) + " tries left ");
+                logger.info("Please enter 'MALE' or 'FEMALE '" + (i - 1) + " tries left ");
                 if (i == 1) {
                     System.exit(0);
                 }
@@ -174,21 +174,26 @@ public class UserDialogServiceImpl implements UserDialogService {
         return matcher.matches();
     }
 
+    private boolean regexCount(String s) {
+        Pattern pattern = Pattern.compile("([Y,y](es|ES|eS|Es))");
+        Matcher matcher = pattern.matcher(s);
+        return matcher.matches();
+    }
+
     private void levelCount() {
         System.out.println("Please answer are you professional sportsmen 'YES' or 'NO' ");
         for (int i = 3; i > 0; i--) {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e.toString());
+                logger.error("Please type in another format", e);
                 e.printStackTrace();
             }
             if (regexLevel(readerText)) {
                 clientBuilder = clientBuilder.makeLevel(readerText);
                 return;
             } else {
-
-                System.err.println("Please enter 'YES/yes' or 'NO/no'" + (i - 1) + " tries left ");
+                logger.info("Please enter 'YES' or 'NO'" + (i - 1) + " tries left ");
                 if (i == 1) {
                     System.exit(0);
                 }
@@ -203,21 +208,15 @@ public class UserDialogServiceImpl implements UserDialogService {
 
         try {
 
-
             Name();
-
             Town();
-
             DateOfBirth();
-
             DateOfEnter();
-
-            SexCount();
-
+            countMaleFemale();
             levelCount();
 
         } catch (IOException e) {
-            logger.error("Please type in another format", e.toString());
+            logger.error("Please type in another format", e);
             e.printStackTrace();
         }
         return clientBuilder.build();
@@ -236,7 +235,7 @@ public class UserDialogServiceImpl implements UserDialogService {
                 serviceBuilder = serviceBuilder.makeAmount(Integer.parseInt(reader.readLine()));
 
             } catch (Exception e) {
-                System.err.println("Please type number");
+                logger.info("Please type number");
                 System.exit(0);
             }
 
@@ -246,9 +245,10 @@ public class UserDialogServiceImpl implements UserDialogService {
 
         } catch (IOException e) {
             e.printStackTrace();
+            logger.info("Please type in another format");
 
         } catch (Exception e) {
-            System.err.println("You din't follow instruction");
+            logger.info("You din't follow instruction");
             System.exit(0);
         }
         return data.getServices();
@@ -260,15 +260,13 @@ public class UserDialogServiceImpl implements UserDialogService {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
-                e.printStackTrace();
-                logger.error("Please type in another format", e.toString());
+                logger.error("Please type in another format", e);
             }
-            if (regexLevel(readerText)) {
+            if (regexCount(readerText)) {
                 buildServices();
 
             } else {
                 return;
-
             }
 
         }
@@ -276,7 +274,6 @@ public class UserDialogServiceImpl implements UserDialogService {
 
     }
 
-    @Override
     public Data readData() {
         data.setClient(buildClient());
         data.setServices(buildServices());

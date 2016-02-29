@@ -20,24 +20,20 @@ public class Bill {
         this.summaryPrice = summaryPrice;
     }
 
-    public double getSummaryPrice() {
-        return summaryPrice;
-    }
-
-    @Override
     public String toString() {
         System.out.println("Today is "+ LocalDate.now());
         System.out.println("Client " + client);
         System.out.println("Services "+ listOfServices);
         System.out.println("With all discounts you need to pay  " + summaryPrice);
         System.out.println("Thank you for being our costumer, good luck");
+
         StringBuilder sb = new StringBuilder();
         for (Service s: listOfServices) {
             sb.append(s.toString());
         }
         sb.append(LocalDate.now());
         return sb.toString();
-       // return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+
     }
 
 }

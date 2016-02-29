@@ -2,6 +2,8 @@ package com.sporttown.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,10 +14,9 @@ import java.util.Map;
 
 public class Service {
 
+    private static final Logger logger = LoggerFactory.getLogger(Service.class);
     private int amount;
-
     private ServiceName names;
-
     private int price;
 
     public ServiceName getNames() {
@@ -67,7 +68,6 @@ public class Service {
 
         public ServiceBuilder makeAmount(int amount) {
             this.amount = amount;
-
             return this;
         }
 
@@ -134,7 +134,7 @@ public class Service {
                         price = Integer.parseInt(maps.get("FRESH"));
                         break;
                     default:
-                        System.err.println("This is incorrect service name, " +
+                        logger.error("This is incorrect service name, " +
                                 "please check it again.");
                         System.exit(0);
                 }

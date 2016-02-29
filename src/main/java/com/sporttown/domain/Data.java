@@ -1,5 +1,6 @@
 package com.sporttown.domain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,11 @@ public class Data {
         return services;
     }
 
+    private LocalDate tnow = LocalDate.now();
 
+    public LocalDate getTnow() {
+        return tnow;
+    }
 }
 
 

@@ -20,11 +20,12 @@ public class CalculatorServiceImpl implements CalculatorService {
     private static final Logger logger = LoggerFactory.getLogger(CalculatorServiceImpl.class);
     private double sum;
     private Bill bill;
-    Client client = null;
-    List<Service> list = null;
+    private String positiveAnswer = "YES";
+    private Client client;
+    private List<Service> list;
     private LocalDate happyDayFemale = Year.now().atMonth(Month.MARCH).atDay(8);
     private LocalDate happyDayMale = Year.now().atMonth(Month.OCTOBER).atDay(14);
-    private LocalDate tnow = LocalDate.now();
+    private LocalDate tnow;
 
     private void sum(Client client, List<Service> list) {
 
@@ -44,7 +45,7 @@ public class CalculatorServiceImpl implements CalculatorService {
                 list.get(i).setPrice(0);
                 logger.info("Discount for men day 14 October");
             }
-            if (client.getIsProffecional().equals("YES")
+            if (client.getIsProffecional().equals(positiveAnswer)
                     && list.size() == 1) {
                 switch (list.get(i).getNames()) {
                     case SAYNA:
@@ -78,17 +79,30 @@ public class CalculatorServiceImpl implements CalculatorService {
         }
     }
 
-    @Override
+    public double getSum() {
+        return sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
+
+    public void setTnow(LocalDate tnow) {
+        this.tnow = tnow;
+    }
+
     public Bill buildBill(Data data) {
 
         client = data.getClient();
         list = data.getServices();
+        tnow = data.getTnow();
         bill = new Bill(client, list);
         list.size();
         sum(client, list);
 
         return bill;
     }
+
 
 
 }
