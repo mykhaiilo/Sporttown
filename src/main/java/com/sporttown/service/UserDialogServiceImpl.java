@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -23,7 +24,7 @@ public class UserDialogServiceImpl implements UserDialogService {
     private Data data = new Data();
     private Client.ClientBuilder clientBuilder = new Client.ClientBuilder();
     private String readerText;
-    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 
     private boolean regexName(String s) {
         Pattern pattern = Pattern.compile("[a-zA-z ]*$");
@@ -45,8 +46,10 @@ public class UserDialogServiceImpl implements UserDialogService {
                 return;
             } else {
                 logger.info("Please enter letters from 'a' to 'z' " + (i - 1) + " tries left ");
-                               if (i == 1) {
-                    System.exit(0);
+                if(i==1){
+                    System.out.println("You didn't follow instruction your name would be null");
+                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
+
                 }
 
             }
@@ -70,7 +73,8 @@ public class UserDialogServiceImpl implements UserDialogService {
             } else {
                 logger.info("Please enter letters from 'a' to 'z'" + (i - 1) + " tries left ");
                 if (i == 1) {
-                    System.exit(0);
+                    System.out.println("You didn't follow instruction your town would be null");
+                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
                 }
 
             }
@@ -106,7 +110,8 @@ public class UserDialogServiceImpl implements UserDialogService {
             } else {
                 logger.info("You have " + (i - 1) + " tries left ");
                 if (i == 1) {
-                    System.exit(0);
+                    System.out.println("You didn't follow instruction your date of birth would be null");
+                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
                 }
             }
         }
@@ -128,7 +133,8 @@ public class UserDialogServiceImpl implements UserDialogService {
             } else {
                 logger.info("You have " + (i - 1) + " tries left ");
                 if (i == 1) {
-                    System.exit(0);
+                    System.out.println("You didn't follow instruction your DateofENterGYm would be null");
+                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
                 }
             }
         }
@@ -148,6 +154,8 @@ public class UserDialogServiceImpl implements UserDialogService {
 
     private void countMaleFemale() {
         System.out.println("Please enter your Sex");
+        /*System.out.println(ResourceBundle.getBundle("please_enter_sex"));*/
+        // please_enter_sex=Please enter your Sex
         for (int i = 0; i < 3; i--) {
             try {
                 readerText = reader.readLine();
@@ -161,7 +169,8 @@ public class UserDialogServiceImpl implements UserDialogService {
             } else {
                 logger.info("Please enter 'MALE' or 'FEMALE '" + (i - 1) + " tries left ");
                 if (i == 1) {
-                    System.exit(0);
+                    System.out.println("You didn't follow instruction your SEX would be null");
+                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
                 }
             }
 
@@ -195,7 +204,8 @@ public class UserDialogServiceImpl implements UserDialogService {
             } else {
                 logger.info("Please enter 'YES' or 'NO'" + (i - 1) + " tries left ");
                 if (i == 1) {
-                    System.exit(0);
+                    System.out.println("You didn't follow instruction Answered on question would be null");
+                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
                 }
 
             }
@@ -229,10 +239,12 @@ public class UserDialogServiceImpl implements UserDialogService {
         try {
 
             System.out.println("GYMFORONETIME, GYMTO4PM12, GYMALLDAY12, GYMTO4PMMONTH, GYMALLMONTH31, GYMTRAINER12, MASSAGE, YOGA, SAYNA, KROSFIT, SOLARIY, TOWEL, SLIPPERS, FRESH");
-            serviceBuilder = serviceBuilder.makeName(ServiceName.valueOf(reader.readLine())).makePrice();
+            readerText = reader.readLine();
+            serviceBuilder = serviceBuilder.makeName(ServiceName.valueOf(readerText)).makePrice();
             System.out.println("Please enter amount ");
             try {
-                serviceBuilder = serviceBuilder.makeAmount(Integer.parseInt(reader.readLine()));
+                readerText = reader.readLine();
+                serviceBuilder = serviceBuilder.makeAmount(Integer.parseInt(readerText));
 
             } catch (Exception e) {
                 logger.info("Please type number");
