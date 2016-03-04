@@ -25,6 +25,8 @@ public class UserDialogServiceImpl implements UserDialogService {
     private Client.ClientBuilder clientBuilder = new Client.ClientBuilder();
     private String readerText;
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
+    private ResourceService resourceService = new ResourceService();
+
 
     private boolean regexName(String s) {
         Pattern pattern = Pattern.compile("[a-zA-z ]*$");
@@ -33,22 +35,23 @@ public class UserDialogServiceImpl implements UserDialogService {
     }
 
     private void Name() {
-        System.out.println("Please enter your name");
+
+        System.out.println(resourceService.labels.getString("s1"));
         for (int i = 3; i > 0; i--) {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e);
+                logger.error(resourceService.labels.getString("s15"), e);
                 e.printStackTrace();
             }
             if (regexName(readerText)) {
                 clientBuilder = clientBuilder.makeNameSurname(readerText);
                 return;
             } else {
-                logger.info("Please enter letters from 'a' to 'z' " + (i - 1) + " tries left ");
-                if(i==1){
-                    System.out.println("You didn't follow instruction your name would be null");
-                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
+                logger.info(resourceService.labels.getString("s16") + (i - 1));
+                if (i == 1) {
+                    System.out.println(resourceService.labels.getString("s17"));
+                    logger.info(resourceService.labels.getString("s18") + (i - 1));
 
                 }
 
@@ -59,22 +62,22 @@ public class UserDialogServiceImpl implements UserDialogService {
     }
 
     private void Town() {
-        System.out.println("Please enter your town");
+        System.out.println(resourceService.labels.getString("s2"));
         for (int i = 3; i > 0; i--) {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e);
+                logger.error(resourceService.labels.getString("s15"), e);
                 e.printStackTrace();
             }
             if (regexName(readerText)) {
                 clientBuilder = clientBuilder.makeTown(readerText);
                 return;
             } else {
-                logger.info("Please enter letters from 'a' to 'z'" + (i - 1) + " tries left ");
+                logger.info(resourceService.labels.getString("s16") + (i - 1));
                 if (i == 1) {
-                    System.out.println("You didn't follow instruction your town would be null");
-                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
+                    System.out.println(resourceService.labels.getString("s17"));
+                    logger.info(resourceService.labels.getString("s18"));
                 }
 
             }
@@ -88,9 +91,9 @@ public class UserDialogServiceImpl implements UserDialogService {
             Matcher matcher = pattern.matcher(s);
             return matcher.matches();
         } catch (IllegalArgumentException e) {
-            logger.error("Please type in another format", e);
+            logger.error(resourceService.labels.getString("s15"), e);
         } catch (DateTimeParseException e) {
-            logger.error("Incorrect data type format", e);
+            logger.error(resourceService.labels.getString("s20"), e);
         }
         return false;
     }
@@ -98,20 +101,20 @@ public class UserDialogServiceImpl implements UserDialogService {
     private void DateOfBirth() throws IOException {
         for (int i = 3; i > 0; i--) {
             try {
-                System.out.println("Please enter the date of birth : Year-month-day");
+                System.out.println(resourceService.labels.getString("s3"));
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e);
+                logger.error(resourceService.labels.getString("s15"), e);
                 e.printStackTrace();
             }
             if (regexDateOfBirth(readerText)) {
                 clientBuilder = clientBuilder.makeDateOfBirth(LocalDate.parse(readerText));
                 return;
             } else {
-                logger.info("You have " + (i - 1) + " tries left ");
+                logger.info(resourceService.labels.getString("s19") + (i - 1));
                 if (i == 1) {
-                    System.out.println("You didn't follow instruction your date of birth would be null");
-                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
+                    System.out.println(resourceService.labels.getString("s17"));
+                    logger.info(resourceService.labels.getString("s18"));
                 }
             }
         }
@@ -121,20 +124,20 @@ public class UserDialogServiceImpl implements UserDialogService {
     private void DateOfEnter() throws IOException {
         for (int i = 3; i > 0; i--) {
             try {
-                System.out.println("Please enter the date of enter : Year-month-day");
+                System.out.println(resourceService.labels.getString("s4"));
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e);
+                logger.error(resourceService.labels.getString("s15"), e);
                 e.printStackTrace();
             }
             if (regexDateOfBirth(readerText)) {
                 clientBuilder = clientBuilder.makeDateOfEnter(LocalDate.parse(readerText));
                 return;
             } else {
-                logger.info("You have " + (i - 1) + " tries left ");
+                logger.info(resourceService.labels.getString("s19") + (i - 1));
                 if (i == 1) {
-                    System.out.println("You didn't follow instruction your DateofENterGYm would be null");
-                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
+                    System.out.println(resourceService.labels.getString("s17"));
+                    logger.info(resourceService.labels.getString("s18"));
                 }
             }
         }
@@ -147,30 +150,28 @@ public class UserDialogServiceImpl implements UserDialogService {
             Matcher matcher = pattern.matcher(s);
             return matcher.matches();
         } catch (IllegalArgumentException e) {
-            logger.error("Please type correct value YES or NO");
+            logger.error(resourceService.labels.getString("s21"));
         }
         return false;
     }
 
     private void countMaleFemale() {
-        System.out.println("Please enter your Sex");
-        /*System.out.println(ResourceBundle.getBundle("please_enter_sex"));*/
-        // please_enter_sex=Please enter your Sex
+        System.out.println(resourceService.labels.getString("s5"));
         for (int i = 0; i < 3; i--) {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e);
+                logger.error(resourceService.labels.getString("s15"), e);
                 e.printStackTrace();
             }
             if (regexSex(readerText)) {
                 clientBuilder = clientBuilder.makeSex(Sex.valueOf(readerText));
                 return;
             } else {
-                logger.info("Please enter 'MALE' or 'FEMALE '" + (i - 1) + " tries left ");
+                logger.info(resourceService.labels.getString("s22") + (i - 1));
                 if (i == 1) {
-                    System.out.println("You didn't follow instruction your SEX would be null");
-                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
+                    System.out.println(resourceService.labels.getString("s17"));
+                    logger.info(resourceService.labels.getString("s18"));
                 }
             }
 
@@ -190,22 +191,22 @@ public class UserDialogServiceImpl implements UserDialogService {
     }
 
     private void levelCount() {
-        System.out.println("Please answer are you professional sportsmen 'YES' or 'NO' ");
+        System.out.println(resourceService.labels.getString("s6"));
         for (int i = 3; i > 0; i--) {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e);
+                logger.error(resourceService.labels.getString("s15"), e);
                 e.printStackTrace();
             }
             if (regexLevel(readerText)) {
                 clientBuilder = clientBuilder.makeLevel(readerText);
                 return;
             } else {
-                logger.info("Please enter 'YES' or 'NO'" + (i - 1) + " tries left ");
+                logger.info(resourceService.labels.getString("s21") + (i - 1));
                 if (i == 1) {
-                    System.out.println("You didn't follow instruction Answered on question would be null");
-                    logger.info("User didn't follow instruction Answered on question typed 3 times wrong");
+                    System.out.println(resourceService.labels.getString("s17"));
+                    logger.info(resourceService.labels.getString("s18"));
                 }
 
             }
@@ -226,7 +227,7 @@ public class UserDialogServiceImpl implements UserDialogService {
             levelCount();
 
         } catch (IOException e) {
-            logger.error("Please type in another format", e);
+            logger.error(resourceService.labels.getString("s15"), e);
             e.printStackTrace();
         }
         return clientBuilder.build();
@@ -237,18 +238,18 @@ public class UserDialogServiceImpl implements UserDialogService {
         Service.ServiceBuilder serviceBuilder = new Service.ServiceBuilder();
 
         try {
-
+            System.out.println(resourceService.labels.getString("s7"));
             System.out.println("GYMFORONETIME, GYMTO4PM12, GYMALLDAY12, GYMTO4PMMONTH, GYMALLMONTH31, GYMTRAINER12, MASSAGE, YOGA, SAYNA, KROSFIT, SOLARIY, TOWEL, SLIPPERS, FRESH");
             readerText = reader.readLine();
             serviceBuilder = serviceBuilder.makeName(ServiceName.valueOf(readerText)).makePrice();
-            System.out.println("Please enter amount ");
+            System.out.println(resourceService.labels.getString("s8"));
             try {
                 readerText = reader.readLine();
                 serviceBuilder = serviceBuilder.makeAmount(Integer.parseInt(readerText));
 
             } catch (Exception e) {
-                logger.info("Please type number");
-                System.exit(0);
+                logger.info(resourceService.labels.getString("s23"));
+                System.out.println(resourceService.labels.getString("s17"));
             }
 
             data.getServices().add(serviceBuilder.build());
@@ -257,22 +258,22 @@ public class UserDialogServiceImpl implements UserDialogService {
 
         } catch (IOException e) {
             e.printStackTrace();
-            logger.info("Please type in another format");
+            logger.info(resourceService.labels.getString("s15"));
 
         } catch (Exception e) {
-            logger.info("You din't follow instruction");
-            System.exit(0);
+            logger.info(resourceService.labels.getString("s17"));
+            System.out.println(resourceService.labels.getString("s17"));
         }
         return data.getServices();
     }
 
     private void buildCount() {
-        System.out.println("Do you want more service ?");
+        System.out.println(resourceService.labels.getString("s9"));
         for (int i = 3; i > 0; i--) {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error("Please type in another format", e);
+                logger.error(resourceService.labels.getString("s15"), e);
             }
             if (regexCount(readerText)) {
                 buildServices();
@@ -287,6 +288,7 @@ public class UserDialogServiceImpl implements UserDialogService {
     }
 
     public Data readData() {
+        resourceService.LocationsLanguage();
         data.setClient(buildClient());
         data.setServices(buildServices());
         return data;

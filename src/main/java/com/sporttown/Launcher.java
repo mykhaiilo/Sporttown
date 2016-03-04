@@ -8,6 +8,8 @@ import com.sporttown.service.UserDialogServiceImpl;
 
 public class Launcher {
     public static void main(String[] args) {
+
+
         CalculatorServiceImpl calculatorServiceImpl = new CalculatorServiceImpl();
         UserDialogServiceImpl userDialogServiceImpl = new UserDialogServiceImpl();
         Data data = userDialogServiceImpl.readData();
@@ -15,4 +17,5 @@ public class Launcher {
         System.out.println(bill);
 
     }
+
 }

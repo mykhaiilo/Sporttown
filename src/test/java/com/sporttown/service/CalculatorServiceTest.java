@@ -1,5 +1,6 @@
 package com.sporttown.service;
 
+import com.sporttown.domain.Bill;
 import com.sporttown.domain.Client;
 import com.sporttown.domain.Data;
 import com.sporttown.domain.Service;
@@ -27,6 +28,7 @@ public class CalculatorServiceTest {
         data.setClient(new Client());
         Client client = new Client();
         client.setIsProffecional("YES");
+        Bill bill = calculatorService.buildBill(data);
         Assert.assertEquals(0.0, calculatorService.getSum());
     }
 
@@ -42,6 +44,7 @@ public class CalculatorServiceTest {
         data.setClient(new Client());
         Client client = new Client();
         client.setIsProffecional("YES");
+        Bill bill = calculatorService.buildBill(data);
         Assert.assertEquals(0.0, calculatorService.getSum());
     }
 
@@ -57,6 +60,7 @@ public class CalculatorServiceTest {
         data.setClient(new Client());
         Client client = new Client();
         client.setIsProffecional("YES");
+        Bill bill = calculatorService.buildBill(data);
         Assert.assertEquals(0.0, calculatorService.getSum());
     }
 
@@ -72,6 +76,7 @@ public class CalculatorServiceTest {
         data.setClient(new Client());
         Client client = new Client();
         client.setIsProffecional("YES");
+        Bill bill = calculatorService.buildBill(data);
         Assert.assertEquals(0.0, calculatorService.getSum());
     }
 
@@ -87,6 +92,7 @@ public class CalculatorServiceTest {
         Client client = new Client();
         client.setDateOfEnter(LocalDate.ofEpochDay(1990 - 01 - 01));
         calculatorService.setSum(95);
+        Bill bill = calculatorService.buildBill(data);
         Assert.assertEquals(95.0, calculatorService.getSum());
 
     }
@@ -103,6 +109,7 @@ public class CalculatorServiceTest {
         Client client = new Client();
         calculatorService.setTnow(LocalDate.ofEpochDay(2015 - 03 - 8));
         client.setSex(Sex.FEMALE);
+        Bill bill = calculatorService.buildBill(data);
         Assert.assertEquals(0.0, calculatorService.getSum());
     }
 
@@ -118,6 +125,7 @@ public class CalculatorServiceTest {
         Client client = new Client();
         calculatorService.setTnow(LocalDate.ofEpochDay(2015 - 10 - 20));
         client.setSex(Sex.MALE);
+        Bill bill = calculatorService.buildBill(data);
         Assert.assertEquals(0.0, calculatorService.getSum());
     }
 }

@@ -25,7 +25,7 @@ public class Data {
 
     public void setServices(List<Service> services) {
         this.services = services;
-            }
+    }
 
     public List<Service> getServices() {
         return services;
@@ -36,6 +36,9 @@ public class Data {
     public LocalDate getTnow() {
         return tnow;
     }
-}
+
+
+    }
+
 
 

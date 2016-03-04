@@ -26,45 +26,44 @@ public class CalculatorServiceImpl implements CalculatorService {
     private LocalDate happyDayFemale = Year.now().atMonth(Month.MARCH).atDay(8);
     private LocalDate happyDayMale = Year.now().atMonth(Month.OCTOBER).atDay(14);
     private LocalDate tnow;
+    private ResourceService resourceService = new ResourceService();
 
     private void sum(Client client, List<Service> list) {
 
         for (int i = 0; i < list.size(); i++) {
             try {
-
-
                 if (tnow == happyDayFemale
                         && Sex.FEMALE.toString().equals(client.getSex())
                         && list.equals(ServiceName.GYMFORONETIME)
                         && list.size() == 1) {
                     list.get(i).setPrice(0);
-                    logger.info("Discount for female date 8 March");
+                    logger.info(resourceService.labels.getString("s24"));
                 }
                 if (tnow == happyDayMale
                         && client.getSex().equals(Sex.MALE.toString())
                         && list.equals(ServiceName.GYMFORONETIME)
                         && list.size() == 1) {
                     list.get(i).setPrice(0);
-                    logger.info("Discount for men day 14 October");
+                    logger.info(resourceService.labels.getString("s25"));
                 }
                 if (client.getIsProffecional().equals(positiveAnswer)
                         && list.size() == 1) {
                     switch (list.get(i).getNames()) {
                         case SAYNA:
                             list.get(i).setPrice(0);
-                            logger.info("Professional sportsmen has discount for sayna");
+                           logger.info(resourceService.labels.getString("s26"));
                             break;
                         case SLIPPERS:
                             list.get(i).setPrice(0);
-                            logger.info("Professional sportsmen has discount for slippers");
+                            logger.info(resourceService.labels.getString("s27"));
                             break;
                         case MASSAGE:
                             list.get(i).setPrice(0);
-                            logger.info("Professional sportsmen has discount for massage");
+                            logger.info(resourceService.labels.getString("s28"));
                             break;
                         case TOWEL:
                             list.get(i).setPrice(0);
-                            logger.info("Professional sportsmen has discount for towel");
+                            logger.info(resourceService.labels.getString("s29"));
                             break;
                         default:
                             break;
@@ -73,13 +72,13 @@ public class CalculatorServiceImpl implements CalculatorService {
                 sum += list.get(i).getPrice();
                 if ((tnow.getYear() - client.getDateOfEnter().getYear()) > 10) {
                     sum *= 0.95;
-                    logger.info("This client visit sport gym over then 10 years");
+                   logger.info(resourceService.labels.getString("s30"));
 
 
                 }
                 bill.setSummaryPrice(sum);
             } catch (NullPointerException e) {
-                logger.error("User type wrong information");
+                logger.error(resourceService.labels.getString("s31"));
             }
         }
     }
