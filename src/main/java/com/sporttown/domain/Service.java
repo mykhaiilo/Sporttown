@@ -23,17 +23,17 @@ public class Service {
         return names;
     }
 
-    public void setAmount(int amount) {
+    /*public void setAmount(int amount) {
         this.amount = amount;
-    }
+    }*/
 
     public int getAmount() {
         return amount;
     }
 
-    public void setName(ServiceName names) {
+    /*public void setName(ServiceName names) {
         this.names = names;
-    }
+    }*/
 
     public int getPrice() {
         return price;
@@ -54,8 +54,10 @@ public class Service {
         private Map<String, String> maps = new HashMap<String, String>();
         private ServiceName names;
 
-        public void setNames(ServiceName names) {
+
+        public ServiceBuilder setNames(ServiceName names) {
             this.names = names;
+            return this;
         }
 
         public ServiceName getNames() {
@@ -139,9 +141,9 @@ public class Service {
                         System.exit(0);
                 }
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+              // log errror  e.printStackTrace();
             } catch (IOException e) {
-                e.printStackTrace();
+             // log errror   e.printStackTrace();
             }
             return this;
         }
@@ -149,8 +151,8 @@ public class Service {
 
         public Service build() {
             Service service = new Service();
-            service.setName(names);
-            service.setPrice(price);
+            service.names = names;
+            service.price = price;
             return service;
 
         }

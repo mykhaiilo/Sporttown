@@ -14,7 +14,6 @@ import java.time.Month;
 import java.time.Year;
 import java.util.List;
 
-
 public class CalculatorServiceImpl implements CalculatorService {
 
     private static final Logger logger = LoggerFactory.getLogger(CalculatorServiceImpl.class);
@@ -23,47 +22,47 @@ public class CalculatorServiceImpl implements CalculatorService {
     private String positiveAnswer = "YES";
     private Client client;
     private List<Service> list;
-    private LocalDate happyDayFemale = Year.now().atMonth(Month.MARCH).atDay(8);
-    private LocalDate happyDayMale = Year.now().atMonth(Month.OCTOBER).atDay(14);
     private LocalDate tnow;
+    private static final LocalDate internationalWomenDay = Year.now().atMonth(Month.MARCH).atDay(8);
+    private static final LocalDate dayOfDefender = Year.now().atMonth(Month.OCTOBER).atDay(14);
     private ResourceService resourceService = new ResourceService();
 
     private void sum(Client client, List<Service> list) {
 
         for (int i = 0; i < list.size(); i++) {
             try {
-                if (tnow == happyDayFemale
+                if (tnow == internationalWomenDay
                         && Sex.FEMALE.toString().equals(client.getSex())
                         && list.equals(ServiceName.GYMFORONETIME)
                         && list.size() == 1) {
                     list.get(i).setPrice(0);
-                    logger.info(resourceService.labels.getString("s24"));
+                    System.out.println(resourceService.labels.getString("s24"));
                 }
-                if (tnow == happyDayMale
-                        && client.getSex().equals(Sex.MALE.toString())
+                if (tnow == dayOfDefender
+                        && Sex.MALE.toString().equals(client.getSex())
                         && list.equals(ServiceName.GYMFORONETIME)
                         && list.size() == 1) {
                     list.get(i).setPrice(0);
-                    logger.info(resourceService.labels.getString("s25"));
+                    System.out.println(resourceService.labels.getString("s25"));
                 }
                 if (client.getIsProffecional().equals(positiveAnswer)
                         && list.size() == 1) {
                     switch (list.get(i).getNames()) {
                         case SAYNA:
                             list.get(i).setPrice(0);
-                           logger.info(resourceService.labels.getString("s26"));
+                            System.out.println(resourceService.labels.getString("s26"));
                             break;
                         case SLIPPERS:
                             list.get(i).setPrice(0);
-                            logger.info(resourceService.labels.getString("s27"));
+                            System.out.println(resourceService.labels.getString("s27"));
                             break;
                         case MASSAGE:
                             list.get(i).setPrice(0);
-                            logger.info(resourceService.labels.getString("s28"));
+                            System.out.println(resourceService.labels.getString("s28"));
                             break;
                         case TOWEL:
                             list.get(i).setPrice(0);
-                            logger.info(resourceService.labels.getString("s29"));
+                            System.out.println(resourceService.labels.getString("s29"));
                             break;
                         default:
                             break;
@@ -72,27 +71,13 @@ public class CalculatorServiceImpl implements CalculatorService {
                 sum += list.get(i).getPrice();
                 if ((tnow.getYear() - client.getDateOfEnter().getYear()) > 10) {
                     sum *= 0.95;
-                   logger.info(resourceService.labels.getString("s30"));
-
-
+                    System.out.println(resourceService.labels.getString("s30"));
                 }
                 bill.setSummaryPrice(sum);
             } catch (NullPointerException e) {
                 logger.error(resourceService.labels.getString("s31"));
             }
         }
-    }
-
-    public double getSum() {
-        return sum;
-    }
-
-    public void setSum(double sum) {
-        this.sum = sum;
-    }
-
-    public void setTnow(LocalDate tnow) {
-        this.tnow = tnow;
     }
 
     public Bill buildBill(Data data) {
@@ -102,7 +87,6 @@ public class CalculatorServiceImpl implements CalculatorService {
         tnow = data.getTnow();
         bill = new Bill(client, list);
         sum(client, list);
-
         return bill;
     }
 

@@ -22,22 +22,23 @@ public class Bill {
         this.summaryPrice = summaryPrice;
     }
 
+    public double getSummaryPrice() {
+        return summaryPrice;
+    }
+
     private ResourceService resourceService = new ResourceService();
 
 
     public String toString() {
-        System.out.println(resourceService.labels.getString("s10")+ LocalDate.now());
-        System.out.println(resourceService.labels.getString("s11") + client);
-        System.out.println(resourceService.labels.getString("s12") + listOfServices);
-        System.out.println(resourceService.labels.getString("s13") + summaryPrice);
-        System.out.println(resourceService.labels.getString("s14"));
-
-
         StringBuilder sb = new StringBuilder();
+        sb.append("\n"+resourceService.labels.getString("s10")+LocalDate.now());
+        sb.append("\n" + client);
         for (Service s : listOfServices) {
             sb.append(s.toString());
         }
-        sb.append(LocalDate.now());
+        sb.append("\n" + resourceService.labels.getString("s13") + " " + summaryPrice);
+        sb.append("\n" + resourceService.labels.getString("s14"));
+
         return sb.toString();
 
     }

@@ -5,9 +5,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.time.LocalDate;
 
-/**
- * Created by admin on 15.01.2016.
- */
     public class Client {
     private String nameSurname;
     private LocalDate dateOfBirth;
@@ -69,9 +66,7 @@ import java.time.LocalDate;
         private String level;
         private static int count;
 
-        public LocalDate getDateOfEnter() {
-            return dateOfEnter;
-        }
+
 
         public ClientBuilder makeNameSurname(String name_surname) {
             this.nameSurname = name_surname;

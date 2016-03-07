@@ -4,10 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * Created by admin on 15.01.2016.
- */
 public class Data {
 
     private List<Service> services = new ArrayList<>();
@@ -16,29 +12,35 @@ public class Data {
 
     public void setClient(Client client) {
         this.client = client;
-        ;
+    }
+
+    public void addAllServices(List<Service> list){
+        services.addAll(list);
     }
 
     public Client getClient() {
         return client;
     }
 
-    public void setServices(List<Service> services) {
-        this.services = services;
-    }
-
     public List<Service> getServices() {
         return services;
     }
 
-    private LocalDate tnow = LocalDate.now();
+    public LocalDate tnow = LocalDate.now();
 
     public LocalDate getTnow() {
         return tnow;
     }
 
-
+    public void setTnow(LocalDate tnow) {
+        this.tnow = tnow;
     }
+
+    public void addService(Service service) {
+        this.services.add(service);
+    }
+}
+
 
 
 

@@ -10,8 +10,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CalculatorServiceTest {
 
@@ -21,15 +19,13 @@ public class CalculatorServiceTest {
 
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-        Service service = new Service();
-        service.setName(ServiceName.SAYNA);
-        List<Service> list = new ArrayList<>();
-        list.add(service);
+
+        data.getServices().add(new Service());
+        //data.getServices().get(0).setName(ServiceName.SAYNA);
         data.setClient(new Client());
-        Client client = new Client();
-        client.setIsProffecional("YES");
+        data.getClient().setIsProffecional("YES");
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(0.0, calculatorService.getSum());
+        Assert.assertEquals(0.0, bill.getSummaryPrice());
     }
 
     @Test
@@ -37,15 +33,13 @@ public class CalculatorServiceTest {
 
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-        Service service = new Service();
-        service.setName(ServiceName.SLIPPERS);
-        List<Service> list = new ArrayList<>();
-        list.add(service);
+
+        data.getServices().add(new Service());
+        //data.getServices().get(0).setName(ServiceName.SLIPPERS);
         data.setClient(new Client());
-        Client client = new Client();
-        client.setIsProffecional("YES");
+        data.getClient().setIsProffecional("YES");
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(0.0, calculatorService.getSum());
+        Assert.assertEquals(0.0, bill.getSummaryPrice());
     }
 
     @Test
@@ -53,15 +47,13 @@ public class CalculatorServiceTest {
 
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-        Service service = new Service();
-        service.setName(ServiceName.TOWEL);
-        List<Service> list = new ArrayList<>();
-        list.add(service);
+
+        data.getServices().add(new Service());
+      //  data.getServices().get(0).setName(ServiceName.TOWEL);
         data.setClient(new Client());
-        Client client = new Client();
-        client.setIsProffecional("YES");
+        data.getClient().setIsProffecional("YES");
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(0.0, calculatorService.getSum());
+        Assert.assertEquals(0.0, bill.getSummaryPrice());
     }
 
     @Test
@@ -69,64 +61,58 @@ public class CalculatorServiceTest {
 
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-        Service service = new Service();
-        service.setName(ServiceName.MASSAGE);
-        List<Service> list = new ArrayList<>();
-        list.add(service);
+
+        data.getServices().add(new Service());
+    //    data.getServices().get(0).setName(ServiceName.MASSAGE);
         data.setClient(new Client());
-        Client client = new Client();
-        client.setIsProffecional("YES");
+        data.getClient().setIsProffecional("YES");
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(0.0, calculatorService.getSum());
+        Assert.assertEquals(0.0, bill.getSummaryPrice());
     }
 
     @Test
     public void testCalcSerForTenYearSportsmen() {
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-        Service service = new Service();
-        List<Service> list = new ArrayList<>();
-        list.add(service);
-        service.setName(ServiceName.FRESH);
+
+        data.getServices().add(new Service());
+  //      data.getServices().get(0).setName(ServiceName.GYMFORONETIME);
         data.setClient(new Client());
-        Client client = new Client();
-        client.setDateOfEnter(LocalDate.ofEpochDay(1990 - 01 - 01));
-        calculatorService.setSum(95);
+        data.getClient().setDateOfEnter(LocalDate.ofEpochDay(1990-01-01));
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(95.0, calculatorService.getSum());
+        Assert.assertEquals(95.0, bill.getSummaryPrice());
 
     }
 
     @Test
-    public void testCalculationServiceImplForWomenDay() {
+    public void testCalculationServiceImplForInternationalWomenDay() {
+
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-        Service service = new Service();
-        service.setName(ServiceName.SAYNA);
-        List<Service> list = new ArrayList<>();
-        list.add(service);
+        Service service= new Service.ServiceBuilder().setNames(ServiceName.GYMFORONETIME).build();
+        //data.getServices().add(new Service());
+        //data.getServices().get(0).setName(ServiceName.GYMFORONETIME);
+        data.addService(service);
         data.setClient(new Client());
-        Client client = new Client();
-        calculatorService.setTnow(LocalDate.ofEpochDay(2015 - 03 - 8));
-        client.setSex(Sex.FEMALE);
+        data.getClient().setSex(Sex.FEMALE);
+        data.setTnow(LocalDate.ofEpochDay(2015 - 03 - 8));
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(0.0, calculatorService.getSum());
+        Assert.assertEquals(0.0, bill.getSummaryPrice());
+
     }
 
     @Test
-    public void testCalculationServiceImplForMenDay() {
+    public void testCalculationServiceImplForDayOfDefender() {
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-        Service service = new Service();
-        service.setName(ServiceName.SAYNA);
-        List<Service> list = new ArrayList<>();
-        list.add(service);
+
+        data.getServices().add(new Service());
+//        data.getServices().get(0).setName(ServiceName.GYMFORONETIME);
         data.setClient(new Client());
-        Client client = new Client();
-        calculatorService.setTnow(LocalDate.ofEpochDay(2015 - 10 - 20));
-        client.setSex(Sex.MALE);
+        data.getClient().setSex(Sex.MALE);
+        data.setTnow(LocalDate.ofEpochDay(2015 - 03 - 8));
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(0.0, calculatorService.getSum());
+        Assert.assertEquals(0.0, bill.getSummaryPrice());
     }
 }
 

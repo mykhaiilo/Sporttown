@@ -26,15 +26,15 @@ public class UserDialogServiceImpl implements UserDialogService {
     private String readerText;
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
     private ResourceService resourceService = new ResourceService();
+    private final String yesNo= "([Y,y](es|ES|eS|Es))|([N,n](o|O))";
 
-
-    private boolean regexName(String s) {
+    private boolean checkregexName(String s) {
         Pattern pattern = Pattern.compile("[a-zA-z ]*$");
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
     }
 
-    private void Name() {
+    private void createName() {
 
         System.out.println(resourceService.labels.getString("s1"));
         for (int i = 3; i > 0; i--) {
@@ -42,16 +42,16 @@ public class UserDialogServiceImpl implements UserDialogService {
                 readerText = reader.readLine();
             } catch (IOException e) {
                 logger.error(resourceService.labels.getString("s15"), e);
-                e.printStackTrace();
+
             }
-            if (regexName(readerText)) {
+            if (checkregexName(readerText)) {
                 clientBuilder = clientBuilder.makeNameSurname(readerText);
                 return;
             } else {
-                logger.info(resourceService.labels.getString("s16") + (i - 1));
+                System.out.println(resourceService.labels.getString("s16") + " " + (i - 1));
                 if (i == 1) {
                     System.out.println(resourceService.labels.getString("s17"));
-                    logger.info(resourceService.labels.getString("s18") + (i - 1));
+
 
                 }
 
@@ -61,20 +61,20 @@ public class UserDialogServiceImpl implements UserDialogService {
 
     }
 
-    private void Town() {
+    private void createTown() {
         System.out.println(resourceService.labels.getString("s2"));
         for (int i = 3; i > 0; i--) {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
                 logger.error(resourceService.labels.getString("s15"), e);
-                e.printStackTrace();
+
             }
-            if (regexName(readerText)) {
+            if (checkregexName(readerText)) {
                 clientBuilder = clientBuilder.makeTown(readerText);
                 return;
             } else {
-                logger.info(resourceService.labels.getString("s16") + (i - 1));
+                System.out.println(resourceService.labels.getString("s16") + " " + (i - 1));
                 if (i == 1) {
                     System.out.println(resourceService.labels.getString("s17"));
                     logger.info(resourceService.labels.getString("s18"));
@@ -85,66 +85,82 @@ public class UserDialogServiceImpl implements UserDialogService {
         }
     }
 
-    private boolean regexDateOfBirth(String s) {
+    private boolean checkregexDateOfBirth(String s) {
         try {
             Pattern pattern = Pattern.compile(String.valueOf(LocalDate.parse(s)));
             Matcher matcher = pattern.matcher(s);
             return matcher.matches();
-        } catch (IllegalArgumentException e) {
-            logger.error(resourceService.labels.getString("s15"), e);
         } catch (DateTimeParseException e) {
             logger.error(resourceService.labels.getString("s20"), e);
+        } catch (IllegalArgumentException e) {
+            logger.error(resourceService.labels.getString("s15"), e);
         }
         return false;
     }
 
-    private void DateOfBirth() throws IOException {
+    private void createDateOfBirth() throws IOException {
         for (int i = 3; i > 0; i--) {
             try {
                 System.out.println(resourceService.labels.getString("s3"));
                 readerText = reader.readLine();
             } catch (IOException e) {
                 logger.error(resourceService.labels.getString("s15"), e);
-                e.printStackTrace();
+
+            } catch (DateTimeParseException e) {
+                logger.error(resourceService.labels.getString("s20"), e);
             }
-            if (regexDateOfBirth(readerText)) {
+
+            if (checkregexDateOfBirth(readerText)) {
                 clientBuilder = clientBuilder.makeDateOfBirth(LocalDate.parse(readerText));
                 return;
             } else {
-                logger.info(resourceService.labels.getString("s19") + (i - 1));
+                System.out.println(resourceService.labels.getString("s19") + " " + (i - 1));
                 if (i == 1) {
                     System.out.println(resourceService.labels.getString("s17"));
-                    logger.info(resourceService.labels.getString("s18"));
+
                 }
             }
         }
 
     }
 
-    private void DateOfEnter() throws IOException {
+    private boolean checkregexDateOfEnter(String s) {
+        try {
+            Pattern pattern = Pattern.compile(String.valueOf(LocalDate.parse(s)));
+            Matcher matcher = pattern.matcher(s);
+            return matcher.matches();
+        } catch (DateTimeParseException e) {
+            logger.error(resourceService.labels.getString("s20"), e);
+        } catch (IllegalArgumentException e) {
+            logger.error(resourceService.labels.getString("s15"), e);
+        }
+        return false;
+    }
+
+    private void createDateOfEnter() throws IOException {
         for (int i = 3; i > 0; i--) {
             try {
                 System.out.println(resourceService.labels.getString("s4"));
                 readerText = reader.readLine();
             } catch (IOException e) {
                 logger.error(resourceService.labels.getString("s15"), e);
-                e.printStackTrace();
+
             }
-            if (regexDateOfBirth(readerText)) {
+            if (checkregexDateOfEnter(readerText)) {
                 clientBuilder = clientBuilder.makeDateOfEnter(LocalDate.parse(readerText));
                 return;
             } else {
-                logger.info(resourceService.labels.getString("s19") + (i - 1));
+                System.out.println(resourceService.labels.getString("s19") + " " + (i - 1));
                 if (i == 1) {
                     System.out.println(resourceService.labels.getString("s17"));
-                    logger.info(resourceService.labels.getString("s18"));
+
                 }
             }
         }
 
     }
 
-    private boolean regexSex(String s) {
+    private boolean checkregexSex(String s) {
         try {
             Pattern pattern = Pattern.compile(String.valueOf(Sex.valueOf(s)));
             Matcher matcher = pattern.matcher(s);
@@ -155,58 +171,57 @@ public class UserDialogServiceImpl implements UserDialogService {
         return false;
     }
 
-    private void countMaleFemale() {
+    private void createMaleFemale() {
         System.out.println(resourceService.labels.getString("s5"));
         for (int i = 0; i < 3; i--) {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
                 logger.error(resourceService.labels.getString("s15"), e);
-                e.printStackTrace();
+
             }
-            if (regexSex(readerText)) {
+            if (checkregexSex(readerText)) {
                 clientBuilder = clientBuilder.makeSex(Sex.valueOf(readerText));
                 return;
             } else {
-                logger.info(resourceService.labels.getString("s22") + (i - 1));
+                System.out.println(resourceService.labels.getString("s22") + " " + (i - 1));
                 if (i == 1) {
                     System.out.println(resourceService.labels.getString("s17"));
-                    logger.info(resourceService.labels.getString("s18"));
+
                 }
             }
 
         }
     }
 
-    private boolean regexLevel(String s) {
-        Pattern pattern = Pattern.compile("([Y,y](es|ES|eS|Es))|([N,n](o|O))");
+    private boolean checkregexLevel(String s) {
+        Pattern pattern = Pattern.compile(yesNo);
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
     }
 
-    private boolean regexCount(String s) {
-        Pattern pattern = Pattern.compile("([Y,y](es|ES|eS|Es))");
+    private boolean checkregexCount(String s) {
+        Pattern pattern = Pattern.compile(yesNo);
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
     }
 
-    private void levelCount() {
+    private void createlevelCount() {
         System.out.println(resourceService.labels.getString("s6"));
         for (int i = 3; i > 0; i--) {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
                 logger.error(resourceService.labels.getString("s15"), e);
-                e.printStackTrace();
+
             }
-            if (regexLevel(readerText)) {
+            if (checkregexLevel(readerText)) {
                 clientBuilder = clientBuilder.makeLevel(readerText);
                 return;
             } else {
-                logger.info(resourceService.labels.getString("s21") + (i - 1));
+                System.out.println(resourceService.labels.getString("s21") + " " + (i - 1));
                 if (i == 1) {
                     System.out.println(resourceService.labels.getString("s17"));
-                    logger.info(resourceService.labels.getString("s18"));
                 }
 
             }
@@ -215,68 +230,63 @@ public class UserDialogServiceImpl implements UserDialogService {
 
     }
 
-    private Client buildClient() {
+    private Client createClient() {
 
         try {
 
-            Name();
-            Town();
-            DateOfBirth();
-            DateOfEnter();
-            countMaleFemale();
-            levelCount();
+            createName();
+            createTown();
+            createDateOfBirth();
+            createDateOfEnter();
+            createMaleFemale();
+            createlevelCount();
 
         } catch (IOException e) {
             logger.error(resourceService.labels.getString("s15"), e);
-            e.printStackTrace();
+
         }
         return clientBuilder.build();
     }
 
-    private List<Service> buildServices() {
+    private List<Service> createServices() {
 
         Service.ServiceBuilder serviceBuilder = new Service.ServiceBuilder();
 
         try {
             System.out.println(resourceService.labels.getString("s7"));
-            System.out.println("GYMFORONETIME, GYMTO4PM12, GYMALLDAY12, GYMTO4PMMONTH, GYMALLMONTH31, GYMTRAINER12, MASSAGE, YOGA, SAYNA, KROSFIT, SOLARIY, TOWEL, SLIPPERS, FRESH");
+            ServiceName[] serviceNames = ServiceName.values();
+            for (ServiceName serviceName : serviceNames) {
+                System.out.print(serviceName.toString() + ", ");
+            }
+            System.out.println();
             readerText = reader.readLine();
             serviceBuilder = serviceBuilder.makeName(ServiceName.valueOf(readerText)).makePrice();
             System.out.println(resourceService.labels.getString("s8"));
-            try {
-                readerText = reader.readLine();
-                serviceBuilder = serviceBuilder.makeAmount(Integer.parseInt(readerText));
-
-            } catch (Exception e) {
-                logger.info(resourceService.labels.getString("s23"));
-                System.out.println(resourceService.labels.getString("s17"));
-            }
-
+            readerText = reader.readLine();
+            serviceBuilder = serviceBuilder.makeAmount(Integer.parseInt(readerText));
             data.getServices().add(serviceBuilder.build());
-            buildCount();
+            createCount();
 
 
         } catch (IOException e) {
-            e.printStackTrace();
-            logger.info(resourceService.labels.getString("s15"));
+            System.out.println(resourceService.labels.getString("s15"));
 
         } catch (Exception e) {
-            logger.info(resourceService.labels.getString("s17"));
             System.out.println(resourceService.labels.getString("s17"));
         }
         return data.getServices();
     }
 
-    private void buildCount() {
+    private void createCount() {
         System.out.println(resourceService.labels.getString("s9"));
         for (int i = 3; i > 0; i--) {
             try {
                 readerText = reader.readLine();
             } catch (IOException e) {
-                logger.error(resourceService.labels.getString("s15"), e);
+                System.out.println(resourceService.labels.getString("s15"));
             }
-            if (regexCount(readerText)) {
-                buildServices();
+            if (checkregexCount(readerText)) {
+                createServices();
 
             } else {
                 return;
@@ -289,8 +299,8 @@ public class UserDialogServiceImpl implements UserDialogService {
 
     public Data readData() {
         resourceService.LocationsLanguage();
-        data.setClient(buildClient());
-        data.setServices(buildServices());
+        data.setClient(createClient());
+        data.addAllServices(createServices());
         return data;
     }
 
