@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>sporttown</groupId>
-    <artifactId>asdf</artifactId>
+    <artifactId>Sportgym</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar
     </packaging>
 
-    <name>sporttown</name>
+    <name>sportgym</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -29,7 +29,7 @@
                 </configuration>
             </plugin>
 
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
@@ -38,11 +38,11 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib</classpathPrefix>
-                            <mainClass>com.sporttown.Launcher</mainClass>
+                            <mainClass>Launcher</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

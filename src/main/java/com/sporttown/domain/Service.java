@@ -23,18 +23,6 @@ public class Service {
         return names;
     }
 
-    /*public void setAmount(int amount) {
-        this.amount = amount;
-    }*/
-
-    public int getAmount() {
-        return amount;
-    }
-
-    /*public void setName(ServiceName names) {
-        this.names = names;
-    }*/
-
     public int getPrice() {
         return price;
     }
@@ -141,9 +129,9 @@ public class Service {
                         System.exit(0);
                 }
             } catch (FileNotFoundException e) {
-              // log errror  e.printStackTrace();
+             logger.error("resourceService.labels.getString(\"s23\")");
             } catch (IOException e) {
-             // log errror   e.printStackTrace();
+                logger.error("resourceService.labels.getString(\"s11\")");
             }
             return this;
         }

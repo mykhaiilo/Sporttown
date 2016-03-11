@@ -26,7 +26,8 @@ public class UserDialogServiceImpl implements UserDialogService {
     private String readerText;
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
     private ResourceService resourceService = new ResourceService();
-    private final String yesNo= "([Y,y](es|ES|eS|Es))|([N,n](o|O))";
+    private final String yes = "([Y,y](es|ES|eS|Es))";
+    private static final String no = "([N,n](o|O))";
 
     private boolean checkregexName(String s) {
         Pattern pattern = Pattern.compile("[a-zA-z ]*$");
@@ -46,7 +47,7 @@ public class UserDialogServiceImpl implements UserDialogService {
             }
             if (checkregexName(readerText)) {
                 clientBuilder = clientBuilder.makeNameSurname(readerText);
-                return;
+                break;
             } else {
                 System.out.println(resourceService.labels.getString("s16") + " " + (i - 1));
                 if (i == 1) {
@@ -72,7 +73,7 @@ public class UserDialogServiceImpl implements UserDialogService {
             }
             if (checkregexName(readerText)) {
                 clientBuilder = clientBuilder.makeTown(readerText);
-                return;
+                break;
             } else {
                 System.out.println(resourceService.labels.getString("s16") + " " + (i - 1));
                 if (i == 1) {
@@ -112,7 +113,7 @@ public class UserDialogServiceImpl implements UserDialogService {
 
             if (checkregexDateOfBirth(readerText)) {
                 clientBuilder = clientBuilder.makeDateOfBirth(LocalDate.parse(readerText));
-                return;
+                break;
             } else {
                 System.out.println(resourceService.labels.getString("s19") + " " + (i - 1));
                 if (i == 1) {
@@ -148,7 +149,7 @@ public class UserDialogServiceImpl implements UserDialogService {
             }
             if (checkregexDateOfEnter(readerText)) {
                 clientBuilder = clientBuilder.makeDateOfEnter(LocalDate.parse(readerText));
-                return;
+                break;
             } else {
                 System.out.println(resourceService.labels.getString("s19") + " " + (i - 1));
                 if (i == 1) {
@@ -194,14 +195,26 @@ public class UserDialogServiceImpl implements UserDialogService {
         }
     }
 
-    private boolean checkregexLevel(String s) {
-        Pattern pattern = Pattern.compile(yesNo);
+    private boolean checkregexLevelYes(String s) {
+        Pattern pattern = Pattern.compile(yes);
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
     }
 
-    private boolean checkregexCount(String s) {
-        Pattern pattern = Pattern.compile(yesNo);
+    private boolean checkregexLevelNo(String s) {
+        Pattern pattern = Pattern.compile(no);
+        Matcher matcher = pattern.matcher(s);
+        return matcher.matches();
+    }
+
+    private boolean checkregexCountYes(String s) {
+        Pattern pattern = Pattern.compile(yes);
+        Matcher matcher = pattern.matcher(s);
+        return matcher.matches();
+    }
+
+    private boolean checkregexCountNo(String s) {
+        Pattern pattern = Pattern.compile(no);
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
     }
@@ -215,9 +228,12 @@ public class UserDialogServiceImpl implements UserDialogService {
                 logger.error(resourceService.labels.getString("s15"), e);
 
             }
-            if (checkregexLevel(readerText)) {
-                clientBuilder = clientBuilder.makeLevel(readerText);
-                return;
+            if (checkregexLevelYes(readerText)) {
+                clientBuilder = clientBuilder.makeLevel(true);
+                break;
+            } else if (checkregexLevelNo(readerText)) {
+                clientBuilder = clientBuilder.makeLevel(false);
+                break;
             } else {
                 System.out.println(resourceService.labels.getString("s21") + " " + (i - 1));
                 if (i == 1) {
@@ -285,11 +301,12 @@ public class UserDialogServiceImpl implements UserDialogService {
             } catch (IOException e) {
                 System.out.println(resourceService.labels.getString("s15"));
             }
-            if (checkregexCount(readerText)) {
+            if (checkregexCountYes(readerText)) {
                 createServices();
-
+            } else if (checkregexCountNo(readerText)) {
+                break;
             } else {
-                return;
+                break;
             }
 
         }

@@ -19,7 +19,7 @@ public class CalculatorServiceImpl implements CalculatorService {
     private static final Logger logger = LoggerFactory.getLogger(CalculatorServiceImpl.class);
     private double sum;
     private Bill bill;
-    private String positiveAnswer = "YES";
+    //private String positiveAnswer = "YES";
     private Client client;
     private List<Service> list;
     private LocalDate tnow;
@@ -45,7 +45,7 @@ public class CalculatorServiceImpl implements CalculatorService {
                     list.get(i).setPrice(0);
                     System.out.println(resourceService.labels.getString("s25"));
                 }
-                if (client.getIsProffecional().equals(positiveAnswer)
+                if (client.getIsProffecional() == true
                         && list.size() == 1) {
                     switch (list.get(i).getNames()) {
                         case SAYNA:
@@ -76,6 +76,7 @@ public class CalculatorServiceImpl implements CalculatorService {
                 bill.setSummaryPrice(sum);
             } catch (NullPointerException e) {
                 logger.error(resourceService.labels.getString("s31"));
+                e.printStackTrace();
             }
         }
     }

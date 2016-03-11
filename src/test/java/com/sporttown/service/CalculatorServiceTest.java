@@ -19,13 +19,12 @@ public class CalculatorServiceTest {
 
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-
-        data.getServices().add(new Service());
-        //data.getServices().get(0).setName(ServiceName.SAYNA);
-        data.setClient(new Client());
-        data.getClient().setIsProffecional("YES");
+        data.addService(new Service.ServiceBuilder().setNames(ServiceName.SAYNA).build());
+        data.setClient(new Client.ClientBuilder().makeNameSurname("ASD aza").makeTown("Lviv")
+                .makeDateOfBirth(LocalDate.ofEpochDay(2001-01-01)).makeDateOfEnter(LocalDate.ofEpochDay(2001-01-01)).makeSex(Sex.MALE).makeLevel(false).build());
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(0.0, bill.getSummaryPrice());
+        data.setTnow(LocalDate.ofEpochDay(2015 - 03 - 15));
+        Assert.assertEquals(760, bill.getSummaryPrice());
     }
 
     @Test
@@ -33,13 +32,12 @@ public class CalculatorServiceTest {
 
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-
-        data.getServices().add(new Service());
-        //data.getServices().get(0).setName(ServiceName.SLIPPERS);
-        data.setClient(new Client());
-        data.getClient().setIsProffecional("YES");
+        data.addService(new Service.ServiceBuilder().setNames(ServiceName.SLIPPERS).build());
+        data.setClient(new Client.ClientBuilder().makeNameSurname("ASD aza").makeTown("Lviv")
+                .makeDateOfBirth(LocalDate.ofEpochDay(2001-01-01)).makeDateOfEnter(LocalDate.ofEpochDay(2001-01-01)).makeSex(Sex.MALE).makeLevel(false).build());
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(0.0, bill.getSummaryPrice());
+        data.setTnow(LocalDate.ofEpochDay(2015 - 03 - 15));
+        Assert.assertEquals(760, bill.getSummaryPrice());
     }
 
     @Test
@@ -47,13 +45,12 @@ public class CalculatorServiceTest {
 
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-
-        data.getServices().add(new Service());
-      //  data.getServices().get(0).setName(ServiceName.TOWEL);
-        data.setClient(new Client());
-        data.getClient().setIsProffecional("YES");
+        data.addService(new Service.ServiceBuilder().setNames(ServiceName.TOWEL).build());
+        data.setClient(new Client.ClientBuilder().makeNameSurname("ASD aza").makeTown("Lviv")
+                .makeDateOfBirth(LocalDate.ofEpochDay(2001-01-01)).makeDateOfEnter(LocalDate.ofEpochDay(2001-01-01)).makeSex(Sex.MALE).makeLevel(false).build());
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(0.0, bill.getSummaryPrice());
+        data.setTnow(LocalDate.ofEpochDay(2015 - 03 - 15));
+        Assert.assertEquals(760, bill.getSummaryPrice());
     }
 
     @Test
@@ -61,26 +58,25 @@ public class CalculatorServiceTest {
 
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-
-        data.getServices().add(new Service());
-    //    data.getServices().get(0).setName(ServiceName.MASSAGE);
-        data.setClient(new Client());
-        data.getClient().setIsProffecional("YES");
+        data.addService(new Service.ServiceBuilder().setNames(ServiceName.MASSAGE).build());
+        data.setClient(new Client.ClientBuilder().makeNameSurname("ASD aza").makeTown("Lviv")
+                .makeDateOfBirth(LocalDate.ofEpochDay(2001-01-01)).makeDateOfEnter(LocalDate.ofEpochDay(2001-01-01)).makeSex(Sex.MALE).makeLevel(false).build());
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(0.0, bill.getSummaryPrice());
+        data.setTnow(LocalDate.ofEpochDay(2015 - 03 - 15));
+        Assert.assertEquals(760, bill.getSummaryPrice());
     }
 
     @Test
     public void testCalcSerForTenYearSportsmen() {
+
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-
-        data.getServices().add(new Service());
-  //      data.getServices().get(0).setName(ServiceName.GYMFORONETIME);
-        data.setClient(new Client());
-        data.getClient().setDateOfEnter(LocalDate.ofEpochDay(1990-01-01));
+        data.addService(new Service.ServiceBuilder().setNames(ServiceName.GYMTRAINER12).build());
+        data.setClient(new Client.ClientBuilder().makeNameSurname("ASD aza").makeTown("Lviv")
+                .makeDateOfBirth(LocalDate.ofEpochDay(2001-01-01)).makeDateOfEnter(LocalDate.ofEpochDay(2001-01-01)).makeSex(Sex.MALE).makeLevel(false).build());
         Bill bill = calculatorService.buildBill(data);
-        Assert.assertEquals(95.0, bill.getSummaryPrice());
+        data.setTnow(LocalDate.ofEpochDay(2015 - 03 - 15));
+        Assert.assertEquals(760, bill.getSummaryPrice());
 
     }
 
@@ -89,12 +85,9 @@ public class CalculatorServiceTest {
 
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-        Service service= new Service.ServiceBuilder().setNames(ServiceName.GYMFORONETIME).build();
-        //data.getServices().add(new Service());
-        //data.getServices().get(0).setName(ServiceName.GYMFORONETIME);
-        data.addService(service);
-        data.setClient(new Client());
-        data.getClient().setSex(Sex.FEMALE);
+        data.addService(new Service.ServiceBuilder().setNames(ServiceName.GYMFORONETIME).build());
+        data.setClient(new Client.ClientBuilder().makeNameSurname("ASD aza").makeTown("Lviv")
+                .makeDateOfBirth(LocalDate.ofEpochDay(2001-01-01)).makeDateOfEnter(LocalDate.ofEpochDay(2015-01-01)).makeSex(Sex.FEMALE).makeLevel(false).build());
         data.setTnow(LocalDate.ofEpochDay(2015 - 03 - 8));
         Bill bill = calculatorService.buildBill(data);
         Assert.assertEquals(0.0, bill.getSummaryPrice());
@@ -105,12 +98,10 @@ public class CalculatorServiceTest {
     public void testCalculationServiceImplForDayOfDefender() {
         CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
         Data data = new Data();
-
-        data.getServices().add(new Service());
-//        data.getServices().get(0).setName(ServiceName.GYMFORONETIME);
-        data.setClient(new Client());
-        data.getClient().setSex(Sex.MALE);
-        data.setTnow(LocalDate.ofEpochDay(2015 - 03 - 8));
+        data.addService(new Service.ServiceBuilder().setNames(ServiceName.GYMFORONETIME).build());
+        data.setClient(new Client.ClientBuilder().makeNameSurname("ASD aza").makeTown("Lviv")
+                .makeDateOfBirth(LocalDate.ofEpochDay(2001-01-01)).makeDateOfEnter(LocalDate.ofEpochDay(2015-01-01)).makeSex(Sex.MALE).makeLevel(false).build());
+        data.setTnow(LocalDate.ofEpochDay(2015 - 10 - 14));
         Bill bill = calculatorService.buildBill(data);
         Assert.assertEquals(0.0, bill.getSummaryPrice());
     }

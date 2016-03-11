@@ -31,8 +31,8 @@ public class Bill {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n"+resourceService.labels.getString("s10")+LocalDate.now());
-        sb.append("\n" + client);
+        sb.append("\n"+resourceService.labels.getString("s10")+" " +LocalDate.now());
+        sb.append("\n" + client+"\n");
         for (Service s : listOfServices) {
             sb.append(s.toString());
         }
