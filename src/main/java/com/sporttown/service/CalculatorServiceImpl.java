@@ -19,7 +19,6 @@ public class CalculatorServiceImpl implements CalculatorService {
     private static final Logger logger = LoggerFactory.getLogger(CalculatorServiceImpl.class);
     private double sum;
     private Bill bill;
-    //private String positiveAnswer = "YES";
     private Client client;
     private List<Service> list;
     private LocalDate tnow;
