@@ -37,14 +37,14 @@ public class CalculatorServiceImpl implements CalculatorService {
                     list.get(i).setPrice(0);
                     System.out.println(resourceService.labels.getString("s24"));
                 }
-                if (tnow == dayOfDefender
+                 if (tnow == dayOfDefender
                         && Sex.MALE.toString().equals(client.getSex())
                         && list.equals(ServiceName.GYMFORONETIME)
                         && list.size() == 1) {
                     list.get(i).setPrice(0);
                     System.out.println(resourceService.labels.getString("s25"));
                 }
-                if (client.getIsProffecional() == true
+                 if (client.getIsProffecional() == true
                         && list.size() == 1) {
                     switch (list.get(i).getNames()) {
                         case SAYNA:

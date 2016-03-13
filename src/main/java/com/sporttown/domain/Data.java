@@ -3,6 +3,7 @@ package com.sporttown.domain;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Data {
 
@@ -26,7 +27,7 @@ public class Data {
         return services;
     }
 
-    public LocalDate tnow = LocalDate.now();
+    private LocalDate tnow = LocalDate.now();
 
     public LocalDate getTnow() {
         return tnow;
@@ -40,6 +41,11 @@ public class Data {
         this.services.add(service);
     }
 
+    private Locale locale = new Locale("en", "US");
+
+    public Locale getLocale() {
+        return locale;
+    }
 }
 
 

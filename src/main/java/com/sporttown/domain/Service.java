@@ -58,6 +58,7 @@ public class Service {
 
         public ServiceBuilder makeAmount(int amount) {
             this.amount = amount;
+
             return this;
         }
 
@@ -130,6 +131,49 @@ public class Service {
                 }
             } catch (FileNotFoundException e) {
              logger.error("resourceService.labels.getString(\"s23\")");
+                switch (names) {
+                    case GYMFORONETIME:
+                        price = 35;
+                        break;
+                    case GYMTO4PM12:
+                        price = 390;
+                        break;
+                    case GYMALLDAY12:
+                        price = 420;
+                        break;
+                    case GYMTO4PMMONTH:
+                        price = 450;
+                        break;
+                    case GYMALLMONTH31:
+                        price =490;
+                        break;
+                    case GYMTRAINER12:
+                        price = 800;
+                        break;
+                    case MASSAGE:
+                        price = 200;
+                        break;
+                    case SAYNA:
+                        price = 150;
+                        break;
+                    case SOLARIY:
+                        price = 30;
+                        break;
+                    case KROSFIT:
+                        price = 35;
+                        break;
+                    case YOGA:
+                        price = 150;
+                        break;
+                    case TOWEL:
+                        price = 5;
+                        break;
+                    case SLIPPERS:
+                        price =5;
+                        break;
+                    case FRESH:
+                        price = 50;
+                        break;}
             } catch (IOException e) {
                 logger.error("resourceService.labels.getString(\"s11\")");
             }

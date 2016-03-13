@@ -12,6 +12,7 @@ public class Launcher {
 
         CalculatorServiceImpl calculatorServiceImpl = new CalculatorServiceImpl();
         UserDialogServiceImpl userDialogServiceImpl = new UserDialogServiceImpl();
+
         Data data = userDialogServiceImpl.readData();
         Bill bill = calculatorServiceImpl.buildBill(data);
         System.out.println(bill);

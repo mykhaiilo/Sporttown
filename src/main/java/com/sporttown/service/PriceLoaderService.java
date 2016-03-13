@@ -7,6 +7,6 @@ import java.util.Map;
  */
 public interface PriceLoaderService {
 
-    public Map<String, String> loadPrices();
+    public Map<String, String> getServiceMap();
 
 }
