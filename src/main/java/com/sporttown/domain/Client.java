@@ -26,32 +26,6 @@ import java.time.LocalDate;
         return isProffecional;
     }
 
-    public void setNameSurname(String namesurname) {
-        this.nameSurname = namesurname;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public void setDateOfEnter(LocalDate dateOfEnter) {
-        this.dateOfEnter = dateOfEnter;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
-    }
-
-    public void setSex(Sex sex) {
-        this.sex = sex;
-    }
-
-    public void setIsProffecional(boolean isProffecional) {
-        this.isProffecional = isProffecional;
-    }
-
-    
-
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 
@@ -101,12 +75,12 @@ import java.time.LocalDate;
 
         public Client build() {
             Client client = new Client();
-            client.setNameSurname(nameSurname);
-            client.setDateOfBirth(dateOfBirth);
-            client.setDateOfEnter(dateOfEnter);
-            client.setTown(town);
-            client.setSex(sex);
-            client.setIsProffecional(level);
+            client.nameSurname=nameSurname;
+            client.dateOfBirth=dateOfBirth;
+            client.dateOfEnter=dateOfEnter;
+            client.town=town;
+            client.sex=sex;
+            client.isProffecional=level;
 
             return client;
 
