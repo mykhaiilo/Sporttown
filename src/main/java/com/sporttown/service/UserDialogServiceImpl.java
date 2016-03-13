@@ -26,7 +26,7 @@ public class UserDialogServiceImpl implements UserDialogService {
     private String readerText;
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
     private ResourceService resourceService = new ResourceService();
-    private final String yes = "([Y,y](es|ES|eS|Es))";
+    private static final String yes = "([Y,y](es|ES|eS|Es))";
     private static final String no = "([N,n](o|O))";
 
     private boolean checkregexName(String s) {
@@ -304,8 +304,6 @@ public class UserDialogServiceImpl implements UserDialogService {
             if (checkregexCountYes(readerText)) {
                 createServices();
             } else if (checkregexCountNo(readerText)) {
-                break;
-            } else {
                 break;
             }
 

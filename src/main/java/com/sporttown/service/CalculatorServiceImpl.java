@@ -72,7 +72,7 @@ public class CalculatorServiceImpl implements CalculatorService {
                     sum *= 0.95;
                     System.out.println(resourceService.labels.getString("s30"));
                 }
-                bill.setSummaryPrice(sum);
+                bill.setSummaryPrice(Math.round(sum));
             } catch (NullPointerException e) {
                 logger.error(resourceService.labels.getString("s31"));
                 e.printStackTrace();
