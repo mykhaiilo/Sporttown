@@ -38,13 +38,12 @@ import java.time.LocalDate;
         private String town;
         private Sex sex;
         private boolean level;
-        private static int count;
 
 
 
         public ClientBuilder makeNameSurname(String name_surname) {
             this.nameSurname = name_surname;
-            count++;
+
             return this;
         }
 
