@@ -1,12 +1,12 @@
 package com.sporttown.service;
 
-import java.util.Map;
+import com.sporttown.domain.Service;
 
 /**
  * Created by michael on 07.03.16.
  */
 public interface PriceLoaderService {
 
-    public Map<String, String> getServiceMap();
+    public void getServiceMap(Service service);
 
 }

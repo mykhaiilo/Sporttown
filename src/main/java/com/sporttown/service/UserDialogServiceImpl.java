@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,6 +29,7 @@ public class UserDialogServiceImpl implements UserDialogService {
     private ResourceService resourceService = new ResourceService();
     private static final String yes = "([Y,y](es|ES|eS|Es))";
     private static final String no = "([N,n](o|O))";
+    private PriceLoaderService priceLoaderService = new PriceLoaderServiceImpl();
 
     private boolean checkregexName(String s) {
         Pattern pattern = Pattern.compile("[a-zA-z ]*$");
@@ -265,7 +267,7 @@ public class UserDialogServiceImpl implements UserDialogService {
     }
 
     private List<Service> createServices() {
-
+        List<Service> services = new ArrayList<>();
         Service.ServiceBuilder serviceBuilder = new Service.ServiceBuilder();
 
         try {
@@ -276,11 +278,13 @@ public class UserDialogServiceImpl implements UserDialogService {
             }
             System.out.println();
             readerText = reader.readLine();
-            serviceBuilder = serviceBuilder.makeName(ServiceName.valueOf(readerText)).makePrice();
+            serviceBuilder = serviceBuilder.makeName(ServiceName.valueOf(readerText))/*.makePrice()*/;
             System.out.println(resourceService.labels.getString("s8"));
             readerText = reader.readLine();
             serviceBuilder = serviceBuilder.makeAmount(Integer.parseInt(readerText));
-            data.getServices().add(serviceBuilder.build());
+            services.add(serviceBuilder.build());
+            System.out.println(services);
+            priceLoaderService.getServiceMap(services.get(0));
             createCount();
 
 

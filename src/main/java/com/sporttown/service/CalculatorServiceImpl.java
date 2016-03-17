@@ -22,22 +22,22 @@ public class CalculatorServiceImpl implements CalculatorService {
     private Client client;
     private List<Service> list;
     private LocalDate tnow;
-    private static final LocalDate internationalWomenDay = Year.now().atMonth(Month.MARCH).atDay(8);
-    private static final LocalDate dayOfDefender = Year.now().atMonth(Month.OCTOBER).atDay(14);
+    private static final LocalDate INTERNATIONAL_WOMEN_DAY = Year.now().atMonth(Month.MARCH).atDay(8);
+    private static final LocalDate DAY_OF_DEFENDER = Year.now().atMonth(Month.OCTOBER).atDay(14);
     private ResourceService resourceService = new ResourceService();
 
     private void sum(Client client, List<Service> list) {
 
         for (int i = 0; i < list.size(); i++) {
             try {
-                if (tnow == internationalWomenDay
+                if (tnow == INTERNATIONAL_WOMEN_DAY
                         && Sex.FEMALE.toString().equals(client.getSex())
                         && list.equals(ServiceName.GYMFORONETIME)
                         && list.size() == 1) {
                     list.get(i).setPrice(0);
                     System.out.println(resourceService.labels.getString("s24"));
                 }
-                 if (tnow == dayOfDefender
+                 if (tnow == DAY_OF_DEFENDER
                         && Sex.MALE.toString().equals(client.getSex())
                         && list.equals(ServiceName.GYMFORONETIME)
                         && list.size() == 1) {

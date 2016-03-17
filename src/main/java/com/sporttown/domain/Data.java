@@ -9,7 +9,7 @@ public class Data {
 
     private List<Service> services = new ArrayList<>();
 
-    private Client client = new Client();
+    private Client client ;
 
     public void setClient(Client client) {
         this.client = client;
