@@ -1,5 +1,0 @@
-<target name="compile" depends="init">
-    <javac destdir="bin" debug="yes">
-        <src path="src" />
-    </javac>
-</target>

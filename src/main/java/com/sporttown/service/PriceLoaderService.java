@@ -7,6 +7,6 @@ import com.sporttown.domain.Service;
  */
 public interface PriceLoaderService {
 
-    public void getServiceMap(Service service);
+    public void setServiceMap(Service service);
 
 }

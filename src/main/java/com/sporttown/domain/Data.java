@@ -11,6 +11,8 @@ public class Data {
 
     private Client client ;
 
+    private LocalDate tnow = LocalDate.now();
+
     public void setClient(Client client) {
         this.client = client;
     }
@@ -26,8 +28,6 @@ public class Data {
     public List<Service> getServices() {
         return services;
     }
-
-    private LocalDate tnow = LocalDate.now();
 
     public LocalDate getTnow() {
         return tnow;

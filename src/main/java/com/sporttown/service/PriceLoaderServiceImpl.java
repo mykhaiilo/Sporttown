@@ -18,13 +18,13 @@ public class PriceLoaderServiceImpl implements PriceLoaderService {
     private static final Logger logger = LoggerFactory.getLogger(PriceLoaderService.class);
     private static final String csvFile = "./src/main/resources/ServicePrices.csv";
     private static final String csvSplitBy = ",";
-    private String line = "";
+        private String line = "";
     private Data data = new Data();
     private Locale locale = data.getLocale();
     private ResourceBundle resourceBundle = ResourceBundle.getBundle("ResourceBundle", locale);
     private Map<String, String> serviceMap = new HashMap<>();
 
-    public void getServiceMap(Service service) {
+    public void setServiceMap(Service service) {
         makePriceforService(service);
 
     }
@@ -112,7 +112,6 @@ public class PriceLoaderServiceImpl implements PriceLoaderService {
                 case YOGA:
                     priceForService = Integer.parseInt(serviceMap.get("YOGA"));
                     service.setPrice(priceForService);
-                    System.out.println(service);
                     break;
                 case TOWEL:
                     priceForService = Integer.parseInt(serviceMap.get("TOWEL"));

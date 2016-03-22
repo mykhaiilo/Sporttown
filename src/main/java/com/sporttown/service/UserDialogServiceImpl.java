@@ -30,6 +30,7 @@ public class UserDialogServiceImpl implements UserDialogService {
     private static final String yes = "([Y,y](es|ES|eS|Es))";
     private static final String no = "([N,n](o|O))";
     private PriceLoaderService priceLoaderService = new PriceLoaderServiceImpl();
+    private List<Service> list = new ArrayList();
 
     private boolean checkregexName(String s) {
         Pattern pattern = Pattern.compile("[a-zA-z ]*$");
@@ -267,7 +268,7 @@ public class UserDialogServiceImpl implements UserDialogService {
     }
 
     private List<Service> createServices() {
-        List<Service> services = new ArrayList<>();
+
         Service.ServiceBuilder serviceBuilder = new Service.ServiceBuilder();
 
         try {
@@ -282,9 +283,9 @@ public class UserDialogServiceImpl implements UserDialogService {
             System.out.println(resourceService.labels.getString("s8"));
             readerText = reader.readLine();
             serviceBuilder = serviceBuilder.makeAmount(Integer.parseInt(readerText));
-            services.add(serviceBuilder.build());
-            System.out.println(services);
-            priceLoaderService.getServiceMap(services.get(0));
+            Service service = serviceBuilder.build();
+            priceLoaderService.setServiceMap(service);
+            list.add(service);
             createCount();
 
 
@@ -294,7 +295,7 @@ public class UserDialogServiceImpl implements UserDialogService {
         } catch (Exception e) {
             System.out.println(resourceService.labels.getString("s17"));
         }
-        return data.getServices();
+        return list;
     }
 
     private void createCount() {
